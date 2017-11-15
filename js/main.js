@@ -57,7 +57,7 @@ const app = new Vue({
   methods: {
     // E2
     getSellQty: function (coins, exchangeName) {
-      return coins - (coins * this.getTakerFee(exchangeName))
+      return coins / (this.getTakerFee(exchangeName) + 1 )
     },
     getTakerFee: function (exchangeName) {
       return this.getExchangeByName(exchangeName).takerFee
