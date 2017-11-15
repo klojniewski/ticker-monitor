@@ -1,19 +1,45 @@
+const sound = new Audio('./sounds/tick.wav')
+
 const exchanges = [
   {
+    id: 0,
     name: 'Poloniex',
     makerFee: 0.25 / 100,
-    takerFee: 0.25 / 100
+    takerFee: 0.25 / 100,
+    tickerUrl: 'https://poloniex.com/public?command=returnTicker',
+    praseTicker: function (ticker, pair) {
+      pair = pair.replace('XLM', 'STR')
+      const pairTicker = ticker[pair.replace('-', '_')]
+      return {
+        ask: pairTicker.lowestAsk,
+        bid: pairTicker.highestBid
+      }
+    },
+    getTickerUrl: function () {
+      return this.tickerUrl
+    }
   },
   {
+    id: 1,
     name: 'Bittrex',
     makerFee: 0.25 / 100,
-    takerFee: 0.25 / 100
+    takerFee: 0.25 / 100,
+    praseTicker: function (ticker, pair) {
+      const responseTicker = ticker.query.results.json.result
+      return {
+        ask: parseFloat(responseTicker.Ask),
+        bid: parseFloat(responseTicker.Bid)
+      }
+    },
+    getTickerUrl: function (pairName) {
+      return `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%20%3D%20%27https%3A%2F%2Fbittrex.com%2Fapi%2Fv1.1%2Fpublic%2Fgetticker%3Fmarket%3D${pairName}%27&format=json&callback=`
+    }
   }
 ]
 
 const pairList = [
   {
-    name: 'XLM',
+    name: 'BTC-XLM',
     courses: [
       {
         name: 'Poloniex',
@@ -29,7 +55,7 @@ const pairList = [
     coins: 5012.5// C1
   },
   {
-    name: 'ETH',
+    name: 'BTC-ETH',
     courses: [
       {
         name: 'Poloniex',
@@ -52,12 +78,13 @@ const app = new Vue({
     message: 'Hello Vue!',
     pairs: pairList,
     exchanges,
-    percentLimit: 3
+    percentLimit: 3,
+    playSounds: true
   },
   methods: {
     // E2
     getSellQty: function (coins, exchangeName) {
-      return coins / (this.getTakerFee(exchangeName) + 1 )
+      return coins / (this.getTakerFee(exchangeName) + 1)
     },
     getTakerFee: function (exchangeName) {
       return this.getExchangeByName(exchangeName).takerFee
@@ -88,6 +115,28 @@ const app = new Vue({
       const sellFee = sellValue * this.getTakerFee(sellExchangeName)
 
       return sellValue - sellFee - this.getSellCost(pair, buyExchangeName)
+    },
+    refresh: function () {
+      pairList.forEach(pair => {
+        exchanges.map(exchange => {
+          return fetch(exchange.getTickerUrl(pair.name)).then(resp => resp.json()).then(ticker => {
+            const pairTicker = exchange.praseTicker(ticker, pair.name)
+            pair.courses[exchange.id].ask = pairTicker.ask
+            pair.courses[exchange.id].bid = pairTicker.bid
+          })
+        })
+      })
+    },
+    hasArbitrage: function (spread) {
+      const hasArbitrage = spread > this.percentLimit
+      if (hasArbitrage && this.playSounds) {
+        sound.play()
+      }
+      return hasArbitrage
     }
   }
 })
+
+setInterval(() => {
+  app.refresh()
+}, 2 * 1000)// 2 seconds
