@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+  <head id="meta">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <title>Arbitrage Monitoring</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Buy on Poloniex, Sell on Bittrex:</h3>
+            <ul>
+              <li v-for="(item, index) in pairs">
+                <strong>{{ item.name }}</strong><br>
+                Poloniex Ask: {{ getCourseByExchangeName(item, 'Poloniex').ask }}<br>
+                Bittrex Bid: {{ getCourseByExchangeName(item, 'Bittrex').bid }}<br>
+                Exchanges Ask/Bid Spread: {{ getExchangesSpread(item, 'Poloniex', 'Bittrex') }}% <span style="color: red;font-weight:bold;" v-if="getExchangesSpread(item, 'Poloniex', 'Bittrex') > percentLimit">ARBITRAGE</span><br>
+                Coins on Poloniex: {{ item.coins }}<br>
+                Coins to sell (excluded fee): {{ getSellQty(item.coins, 'Poloniex') }}<br>
+                Cost spent on Poloniex: {{ getSellCost(item, 'Poloniex') }}<br>
+                <br>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h3>Options:</h3>
+            Arbitrage Percentage Limit:
+            <input type="number" v-model="percentLimit">
+          </div>
+        </div>
+      </div><!-- /.container -->
+    </div>
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    <script src="https://unpkg.com/vue"></script>
+    <!-- <script type="text/javascript" src="./vendor/fetch.js"></script> -->
+    <script type="text/javascript" src="./js/main.js"></script>
+  </body>
+</html>
