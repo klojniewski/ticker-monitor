@@ -24,6 +24,10 @@
                 Coins on Poloniex: {{ item.coins }}<br>
                 Coins to sell (excluded fee): {{ getSellQty(item.coins, 'Poloniex') }}<br>
                 Cost spent on Poloniex: {{ getSellCost(item, 'Poloniex') }}<br>
+
+                SELL whitout free: {{ getPLValue(item, 'Poloniex', 'Bittrex') }} <span v-if="getPLValue(item, 'Poloniex', 'Bittrex') > 0">PROFIT 👍</span>
+                <span v-else>LOSS 😂</span>
+                <br>
                 <br>
               </li>
             </ul>
