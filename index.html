@@ -18,12 +18,12 @@
             <ul>
               <li v-for="(item, index) in pairs">
                 <strong>{{ item.name }}</strong><br>
-                Poloniex Ask: {{ getCourseByExchangeName(item, 'Poloniex').ask }}<br>
-                Bittrex Bid: {{ getCourseByExchangeName(item, 'Bittrex').bid }}<br>
+                Ask: {{ getCourseByExchangeName(item, 'Poloniex').ask }}<br>
+                Bid: {{ getCourseByExchangeName(item, 'Bittrex').bid }}<br>
                 Exchanges Ask/Bid Spread: {{ getExchangesSpread(item, 'Poloniex', 'Bittrex') }}% <span style="color: red;font-weight:bold;" v-if="hasArbitrage(getExchangesSpread(item, 'Poloniex', 'Bittrex'))">ARBITRAGE</span><br>
-                Coins on Poloniex: {{ item.coins }}<br>
+                Coins on market: {{ item.coins }}<br>
                 Coins to sell (excluded fee): {{ getSellQty(item.coins, 'Poloniex') }}<br>
-                Cost spent on Poloniex: {{ getSellCost(item, 'Poloniex') }}<br>
+                Cost spent: {{ getSellCost(item, 'Poloniex') }}<br>
 
                 SELL whitout free: {{ getPLValue(item, 'Poloniex', 'Bittrex') }} <span v-if="getPLValue(item, 'Poloniex', 'Bittrex') > 0">PROFIT 👍</span>
                 <span v-else>LOSS 😂</span>
@@ -42,6 +42,30 @@
               <label for="id-sounds">Play Sounds:</label>
               <input id="id-sounds" type="checkbox" id="checkbox" v-model="playSounds">
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Buy on Bittrex, Sell on Poloniex:</h3>
+            <ul>
+              <li v-for="(item, index) in pairs">
+                <strong>{{ item.name }}</strong><br>
+                Ask: {{ getCourseByExchangeName(item, 'Bittrex').ask }}<br>
+                Bid: {{ getCourseByExchangeName(item, 'Poloniex').bid }}<br>
+                Exchanges Ask/Bid Spread: {{ getExchangesSpread(item, 'Bittrex', 'Poloniex') }}% <span style="color: red;font-weight:bold;" v-if="hasArbitrage(getExchangesSpread(item, 'Poloniex', 'Bittrex'))">ARBITRAGE</span><br>
+                Coins on market: {{ item.coins }}<br>
+                Coins to sell (excluded fee): {{ getSellQty(item.coins, 'Bittrex') }}<br>
+                Cost spent: {{ getSellCost(item, 'Bittrex') }}<br>
+
+                SELL whitout free: {{ getPLValue(item, 'Bittrex', 'Poloniex') }} <span v-if="getPLValue(item, 'Poloniex', 'Bittrex') > 0">PROFIT 👍</span>
+                <span v-else>LOSS 😂</span>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+         
           </div>
         </div>
       </div><!-- /.container -->
