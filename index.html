@@ -8,10 +8,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <title>Arbitrage Monitoring</title>
+    <script src="https://unpkg.com/vue"></script>
   </head>
   <body>
-
-    <div id="app">
+    <div id="app" v-cloak>
       <div class="col-md-12">
         <h3>Options:</h3>
         <div>
@@ -40,13 +40,21 @@
               </tr>
               <tr v-for="(item, index) in pairs">
                 <td>{{ item.name }}</td>
-                <td>{{ getCourseByExchangeName(item, 'Poloniex').ask }}</td> 
-                <td>{{ getCourseByExchangeName(item, 'BitBay').bid }}</td>
-                <td>{{ getExchangesSpread(item, 'Poloniex', 'BitBay') }}% <span style="color: red;font-weight:bold;" v-if="hasArbitrage(getExchangesSpread(item, 'Poloniex', 'BitBay'))">ARBITRAGE</span></td>
+                <td>{{ getCourseByExchangeName(item, 'Poloniex').ask | 8places }}</td>
+                <td>{{ getCourseByExchangeName(item, 'BitBay').bid | 8places }}</td>
+                <td>
+                  {{ getExchangesSpread(item, 'Poloniex', 'BitBay') }}%
+                  <span class="badge badge-success" v-if="hasArbitrage(getExchangesSpread(item, 'Poloniex', 'BitBay'))">
+                    ARBITRAGE
+                  </span>
+                </td>
                 <td>{{ item.coins }}</td>
                 <td>{{ getSellQty(item.coins, 'Poloniex') }}</td>
                 <td>{{ getSellCost(item, 'Poloniex') }}</td>
-                <td>{{ getPLValue(item, 'Poloniex', 'BitBay') }} <span class="alert-success" v-if="getPLValue(item, 'Poloniex', 'BitBay') > 0">PROFIT</span><span class="alert-danger" v-else>LOSS</span></td>
+                <td>
+                  {{ getPLValue(item, 'Poloniex', 'BitBay') }}
+                  <span class="label label-success" v-if="getPLValue(item, 'Poloniex', 'BitBay') > 0">PROFIT</span>
+                  <span class="label label-danger" v-else>LOSS</span></td>
               </tr>
             </table>
           </div>
@@ -54,61 +62,6 @@
         <div class="row">
           <div class="col-md-12">
             <h3>Buy on BitBay, Sell on Poloniex:</h3>
-                <table class="table table-dark">
-                  <tr>
-                    <th scope="col">COIN:</th>
-                    <th>Ask:</th>
-                    <th>Bid:</th>
-                    <th>Exchanges Ask/Bid Spread:</th>
-                    <th>Coins on market:</th>
-                    <th>Coins to sell (excluded fee):</th>
-                    <th>Cost spent:</th>
-                    <th>SELL whitout free:</th>
-                  </tr>
-                  <tr v-for="(item, index) in pairs">
-                    <td>{{ item.name }}</td>
-                    <td>{{ getCourseByExchangeName(item, 'BitBay').ask }}</td> 
-                    <td>{{ getCourseByExchangeName(item, 'Poloniex').bid }}</td>
-                    <td>{{ getExchangesSpread(item, 'BitBay', 'Poloniex') }}% <span style="color: red;font-weight:bold;" v-if="hasArbitrage(getExchangesSpread(item, 'BitBay', 'Poloniex'))">ARBITRAGE</span></td>
-                    <td>{{ item.coins }}</td>
-                    <td>{{ getSellQty(item.coins, 'BitBay') }}</td>
-                    <td>{{ getSellCost(item, 'BitBay') }}</td>
-                    <td>{{ getPLValue(item, 'BitBay', 'Poloniex') }} <span class="alert-success" v-if="getPLValue(item, 'BitBay', 'Poloniex') > 0">PROFIT</span><span class="alert-danger" v-else>LOSS</span></td>
-                  </tr>
-                </table>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <h3>Buy on Bittrex, Sell on Poloniex:</h3>
-                <table class="table table-dark">
-                  <tr>
-                    <th scope="col">COIN:</th>
-                    <th>Ask:</th>
-                    <th>Bid:</th>
-                    <th>Exchanges Ask/Bid Spread:</th>
-                    <th>Coins on market:</th>
-                    <th>Coins to sell (excluded fee):</th>
-                    <th>Cost spent:</th>
-                    <th>SELL whitout free:</th>
-                  </tr>
-                  <tr v-for="(item, index) in pairs">
-                    <td>{{ item.name }}</td>
-                    <td>{{ getCourseByExchangeName(item, 'Bittrex').ask }}</td> 
-                    <td>{{ getCourseByExchangeName(item, 'Poloniex').bid }}</td>
-                    <td>{{ getExchangesSpread(item, 'Bittrex', 'Poloniex') }}% <span style="color: red;font-weight:bold;" v-if="hasArbitrage(getExchangesSpread(item, 'Bittrex', 'Poloniex'))">ARBITRAGE</span></td>
-                    <td>{{ item.coins }}</td>
-                    <td>{{ getSellQty(item.coins, 'Bittrex') }}</td>
-                    <td>{{ getSellCost(item, 'Bittrex') }}</td>
-                    <td>{{ getPLValue(item, 'Bittrex', 'Poloniex') }} <span class="alert-success" v-if="getPLValue(item, 'Bittrex', 'Poloniex') > 0">PROFIT</span><span class="alert-danger" v-else>LOSS</span></td>
-                  </tr>
-                </table>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h3>Buy on Poloniex, Sell on Bittrex:</h3>
             <table class="table table-dark">
               <tr>
                 <th scope="col">COIN:</th>
@@ -116,26 +69,33 @@
                 <th>Bid:</th>
                 <th>Exchanges Ask/Bid Spread:</th>
                 <th>Coins on market:</th>
-                <th>Coins to Sell (excluded fee):</th>
+                <th>Coins to sell (excluded fee):</th>
                 <th>Cost spent:</th>
                 <th>SELL whitout free:</th>
               </tr>
               <tr v-for="(item, index) in pairs">
                 <td>{{ item.name }}</td>
-                <td>{{ getCourseByExchangeName(item, 'Poloniex').ask }}</td> 
-                <td>{{ getCourseByExchangeName(item, 'Bittrex').bid }}</td>
-                <td>{{ getExchangesSpread(item, 'Poloniex', 'Bittrex') }}% <span style="color: red;font-weight:bold;" v-if="hasArbitrage(getExchangesSpread(item, 'Poloniex', 'Bittrex'))">ARBITRAGE</span></td>
+                <td>{{ getCourseByExchangeName(item, 'BitBay').ask | 8places }}</td>
+                <td>{{ getCourseByExchangeName(item, 'Poloniex').bid | 8places }}</td>
+                <td>{{ getExchangesSpread(item, 'BitBay', 'Poloniex') }}%
+                  <span class="badge badge-success" v-if="hasArbitrage(getExchangesSpread(item, 'BitBay', 'Poloniex'))">
+                    ARBITRAGE
+                  </span>
+                </td>
                 <td>{{ item.coins }}</td>
-                <td>{{ getSellQty(item.coins, 'Poloniex') }}</td>
-                <td>{{ getSellCost(item, 'Poloniex') }}</td>
-                <td>{{ getPLValue(item, 'Poloniex', 'Bittrex') }} <span class="alert-success" v-if="getPLValue(item, 'Poloniex', 'Bittrex') > 0">PROFIT</span><span class="alert-danger" v-else>LOSS</span></td>
+                <td>{{ getSellQty(item.coins, 'BitBay') }}</td>
+                <td>{{ getSellCost(item, 'BitBay') }}</td>
+                <td>
+                  {{ getPLValue(item, 'BitBay', 'Poloniex') }}
+                  <span class="label label-success" v-if="getPLValue(item, 'BitBay', 'Poloniex') > 0">PROFIT</span>
+                  <span class="label label-danger" v-else>LOSS</span></td>
+                </td>
               </tr>
             </table>
           </div>
         </div>
       </div><!-- /.container -->
     </div>
-    <script src="https://unpkg.com/vue"></script>
     <script type="text/javascript" src="./js/main.js"></script>
   </body>
 </html>
