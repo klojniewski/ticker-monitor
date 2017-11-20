@@ -2,91 +2,21 @@ const sound = new Audio('./sounds/tick.wav')
 
 Vue.filter('8places', value => parseFloat(value).toFixed(8))
 
-const exchanges = [
-  {
-    id: 0,
-    name: 'Poloniex',
-    makerFee: 0.25 / 100,
-    takerFee: 0.25 / 100,
-    tickerUrl: 'https://poloniex.com/public?command=returnTicker',
-    praseTicker: function (ticker, pair) {
-      pair = pair.replace('BCC', 'BCH')
-      pair = pair.split('-')
-      const pairName = `${pair[1]}_${pair[0]}`
-      const pairTicker = ticker[pairName]
-
-      const askValue = pairTicker.lowestAsk
-      const bidValue = pairTicker.highestBid
-
-      return {
-        ask: askValue,
-        bid: bidValue
-      }
-    },
-    getTickerUrl: function () {
-      return this.tickerUrl
-    }
-  },
-  {
-    id: 1,
-    name: 'BitBay',
-    makerFee: 0.43 / 100,
-    takerFee: 0.43 / 100,
-    praseTicker: function (ticker, pair) {
-      return {
-        ask: ticker.ask,
-        bid: ticker.bid
-      }
-    },
-    getTickerUrl: function (pairName) {
-      const pairTickerb = pairName.replace('-', '')
-      return `https://bitbay.net/API/Public/${pairTickerb}/ticker.json`
-    }
-  }
-]
-
-const pairList = [
-  {
-    name: 'GAME-BTC',
-    courses: [
-      {
-        name: 'Poloniex',
-        ask: 0.00000000,
-        bid: 0.00000000
-      },
-      {
-        name: 'BitBay',
-        ask: 0.00000000,
-        bid: 0.00000000
-      }
-    ],
-    coins: 100// C1
-  },
-  {
-    name: 'ETH-BTC',
-    courses: [
-      {
-        name: 'Poloniex',
-        ask: 0.00000000,
-        bid: 0.00000000
-      },
-      {
-        name: 'BitBay',
-        ask: 0.00000000,
-        bid: 0.00000000
-      }
-    ],
-    coins: 10
-  }
-]
-
 const app = new Vue({
   el: '#app',
+  store,
   data: {
-    pairs: pairList,
-    exchanges,
+    exchangeDrivers,
     percentLimit: 3,
     playSounds: true
+  },
+  computed: {
+    pairs () {
+      return this.$store.getters.pairs
+    }
+  },
+  created () {
+    this.$store.dispatch('init')
   },
   methods: {
     // E2
@@ -98,7 +28,8 @@ const app = new Vue({
       return this.getExchangeByName(exchangeName).takerFee
     },
     getExchangeByName: function (exchangeName) {
-      return exchanges.filter(exchange => exchange.name === exchangeName)[0]
+      exchangeName = exchangeName.toLowerCase()
+      return exchangeDrivers.filter(exchange => exchange.name.toLowerCase() === exchangeName)[0]
     },
     // F2
     getSellCost: function (pair, exchangeName) {
@@ -106,7 +37,7 @@ const app = new Vue({
       return value.toFixed(8)
     },
     getCourseByExchangeName: function (pair, exchangeName) {
-      return pair.courses.filter(exchange => exchange.name === exchangeName)[0]
+      return pair.courses.filter(exchange => exchange.exchange === exchangeName)[0].ticker
     },
     // G2
     getExchangesSpread: function (pair, buyExchangeName, sellExchangeName) {
@@ -127,17 +58,6 @@ const app = new Vue({
 
       return value.toFixed(8)
     },
-    refresh: function () {
-      pairList.forEach(pair => {
-        exchanges.map(exchange => {
-          return fetch(exchange.getTickerUrl(pair.name)).then(resp => resp.json()).then(ticker => {
-            const pairTicker = exchange.praseTicker(ticker, pair.name)
-            pair.courses[exchange.id].ask = pairTicker.ask
-            pair.courses[exchange.id].bid = pairTicker.bid
-          })
-        })
-      })
-    },
     hasArbitrage: function (spread) {
       const hasArbitrage = spread > this.percentLimit
       if (hasArbitrage && this.playSounds) {
@@ -149,5 +69,5 @@ const app = new Vue({
 })
 
 setInterval(() => {
-  app.refresh()
+  app.$store.dispatch('init')
 }, 5 * 1000)// 5 seconds
