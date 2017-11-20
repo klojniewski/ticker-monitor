@@ -38,9 +38,9 @@
                 </h2>
                 <table class="table table-dark" v-if="pair.courses.length">
                   <tr>
-                    <th>Ask:</th>
-                    <th>Bid:</th>
-                    <th>Exchanges Ask/Bid Spread:</th>
+                    <th>Buy Price ({{ exchange.buy }} ask):</th>
+                    <th>Sell Price ({{ exchange.sell }} bid):</th>
+                    <th>Exchanges Spread:</th>
                     <th>Coins on market:</th>
                     <th>Coins to sell (excluded fee):</th>
                     <th>Cost spent:</th>
@@ -48,10 +48,10 @@
                   </tr>
                   <tr>
                     <td>
-                      {{  getCourseByExchangeName(pair, exchange.buy).ask | 8places }}
+                      {{  getCourseByExchangeName(pair, exchange.buy).ask | 8places | currency(pair.name) }}
                     </td>
                     <td>
-                      {{  getCourseByExchangeName(pair, exchange.sell).bid | 8places }}
+                      {{  getCourseByExchangeName(pair, exchange.sell).bid | 8places | currency(pair.name) }}
                     </td>
                     <td>
                       {{ getExchangesSpread(pair, exchange.buy, exchange.sell) }}%
@@ -72,7 +72,7 @@
                       {{ getSellCost(pair, exchange.buy) }}
                     </td>
                     <td>
-                      {{ getPLValue(pair, exchange.buy, exchange.sell) }}
+                      {{ getPLValue(pair, exchange.buy, exchange.sell) | currency(pair.name)}}
                       <span
                         class="label label-success"
                         v-if="getPLValue(pair, exchange.buy, exchange.sell) > 0"
