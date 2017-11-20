@@ -150,4 +150,4 @@ const app = new Vue({
 
 setInterval(() => {
   app.refresh()
-}, 5 * 1000)// 2 seconds
+}, 5 * 1000)// 5 seconds
