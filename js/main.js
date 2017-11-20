@@ -2,6 +2,10 @@ const sound = new Audio('./sounds/tick.wav')
 
 Vue.filter('8places', value => parseFloat(value).toFixed(8))
 
+Vue.filter('currency', (value, pairName) => {
+  return `${parseFloat(value).toFixed(8)} ${pairName.split('-')[1]}`
+})
+
 const app = new Vue({
   el: '#app',
   store,

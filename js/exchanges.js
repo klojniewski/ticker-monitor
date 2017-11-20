@@ -35,8 +35,8 @@ const exchangeDrivers = [
       }
     },
     getTickerUrl: function (pairName) {
-      const pairTickerb = pairName.replace('-', '')
-      return `https://bitbay.net/API/Public/${pairTickerb}/ticker.json`
+      pairName = pairName.replace('-', '')
+      return `https://bitbay.net/API/Public/${pairName}/ticker.json`
     }
   },
   {
@@ -55,6 +55,24 @@ const exchangeDrivers = [
       const pairArray = pairNameOrygial.split('-')
       const pairName = `${pairArray[1]}-${pairArray[0]}`
       return `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%20%3D%20%27https%3A%2F%2Fbittrex.com%2Fapi%2Fv1.1%2Fpublic%2Fgetticker%3Fmarket%3D${pairName}%27&format=json&callback=`
+    }
+  },
+  {
+    id: 3,
+    name: 'Bitmarket',
+    makerFee: 0.43 / 100,
+    takerFee: 0.43 / 100,
+    praseTicker: function (ticker, pair) {
+      ticker = ticker.query.results.json
+      return {
+        ask: parseFloat(ticker.ask),
+        bid: parseFloat(ticker.bid)
+      }
+    },
+    getTickerUrl: function (pairName) {
+      const pairNameFormatted = pairName.replace('-', '')
+
+      return `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%20%3D%20%27https%3A%2F%2Fwww.bitmarket.pl%2Fjson%2F${pairNameFormatted}%2Fticker.json%27&format=json&callback=`
     }
   }
 ]
