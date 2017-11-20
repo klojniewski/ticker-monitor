@@ -1,5 +1,7 @@
 const sound = new Audio('./sounds/tick.wav')
 
+Vue.filter('8places', value => parseFloat(value).toFixed(8))
+
 const exchanges = [
   {
     id: 0,
@@ -8,11 +10,17 @@ const exchanges = [
     takerFee: 0.25 / 100,
     tickerUrl: 'https://poloniex.com/public?command=returnTicker',
     praseTicker: function (ticker, pair) {
-      pair = pair.replace('XLM', 'STR')
-      const pairTicker = ticker[pair.replace('-', '_')]
+      pair = pair.replace('BCC', 'BCH')
+      pair = pair.split('-')
+      const pairName = `${pair[1]}_${pair[0]}`
+      const pairTicker = ticker[pairName]
+
+      const askValue = pairTicker.lowestAsk
+      const bidValue = pairTicker.highestBid
+
       return {
-        ask: pairTicker.lowestAsk,
-        bid: pairTicker.highestBid
+        ask: askValue,
+        bid: bidValue
       }
     },
     getTickerUrl: function () {
@@ -21,51 +29,51 @@ const exchanges = [
   },
   {
     id: 1,
-    name: 'Bittrex',
-    makerFee: 0.25 / 100,
-    takerFee: 0.25 / 100,
+    name: 'BitBay',
+    makerFee: 0.43 / 100,
+    takerFee: 0.43 / 100,
     praseTicker: function (ticker, pair) {
-      const responseTicker = ticker.query.results.json.result
       return {
-        ask: parseFloat(responseTicker.Ask),
-        bid: parseFloat(responseTicker.Bid)
+        ask: ticker.ask,
+        bid: ticker.bid
       }
     },
     getTickerUrl: function (pairName) {
-      return `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%20%3D%20%27https%3A%2F%2Fbittrex.com%2Fapi%2Fv1.1%2Fpublic%2Fgetticker%3Fmarket%3D${pairName}%27&format=json&callback=`
+      const pairTickerb = pairName.replace('-', '')
+      return `https://bitbay.net/API/Public/${pairTickerb}/ticker.json`
     }
   }
 ]
 
 const pairList = [
   {
-    name: 'BTC-XLM',
+    name: 'GAME-BTC',
     courses: [
       {
         name: 'Poloniex',
-        ask: 0.00000522,
-        bid: 0.00000521
+        ask: 0.00000000,
+        bid: 0.00000000
       },
       {
-        name: 'Bittrex',
-        ask: 0.0000054,
-        bid: 0.00000538
+        name: 'BitBay',
+        ask: 0.00000000,
+        bid: 0.00000000
       }
     ],
-    coins: 5012.5// C1
+    coins: 100// C1
   },
   {
-    name: 'BTC-ETH',
+    name: 'ETH-BTC',
     courses: [
       {
         name: 'Poloniex',
-        ask: 0.00000522,
-        bid: 0.00000521
+        ask: 0.00000000,
+        bid: 0.00000000
       },
       {
-        name: 'Bittrex',
-        ask: 0.0000054,
-        bid: 0.00000538
+        name: 'BitBay',
+        ask: 0.00000000,
+        bid: 0.00000000
       }
     ],
     coins: 10
@@ -75,7 +83,6 @@ const pairList = [
 const app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!',
     pairs: pairList,
     exchanges,
     percentLimit: 3,
@@ -84,7 +91,8 @@ const app = new Vue({
   methods: {
     // E2
     getSellQty: function (coins, exchangeName) {
-      return coins / (this.getTakerFee(exchangeName) + 1)
+      const value = coins / (this.getTakerFee(exchangeName) + 1)
+      return value.toFixed(8)
     },
     getTakerFee: function (exchangeName) {
       return this.getExchangeByName(exchangeName).takerFee
@@ -94,7 +102,8 @@ const app = new Vue({
     },
     // F2
     getSellCost: function (pair, exchangeName) {
-      return pair.coins * this.getCourseByExchangeName(pair, exchangeName).ask
+      const value = pair.coins * this.getCourseByExchangeName(pair, exchangeName).ask
+      return value.toFixed(8)
     },
     getCourseByExchangeName: function (pair, exchangeName) {
       return pair.courses.filter(exchange => exchange.name === exchangeName)[0]
@@ -114,7 +123,9 @@ const app = new Vue({
 
       const sellFee = sellValue * this.getTakerFee(sellExchangeName)
 
-      return sellValue - sellFee - this.getSellCost(pair, buyExchangeName)
+      const value = sellValue - sellFee - this.getSellCost(pair, buyExchangeName)
+
+      return value.toFixed(8)
     },
     refresh: function () {
       pairList.forEach(pair => {
@@ -139,4 +150,4 @@ const app = new Vue({
 
 setInterval(() => {
   app.refresh()
-}, 2 * 1000)// 2 seconds
+}, 5 * 1000)// 5 seconds
