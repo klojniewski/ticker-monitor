@@ -56,7 +56,7 @@ const exchangeDrivers = [
     getTickerUrl: function (pairNameOrygial) {
       const pairArray = pairNameOrygial.split('-')
       const pairName = `${pairArray[1]}-${pairArray[0]}`
-      return `http://api.finvea.pl/ticker.php?market=bittrex&coin=${pairName}`
+      return `https://api.finvea.pl/ticker.php?market=bittrex&coin=${pairName}`
     }
   },
   {
@@ -73,7 +73,7 @@ const exchangeDrivers = [
     getTickerUrl: function (pairName) {
       const pairNameFormatted = pairName.replace('-', '')
 
-      return `http://api.finvea.pl/ticker.php?market=bitmarket&coin=${pairNameFormatted}`
+      return `https://api.finvea.pl/ticker.php?market=bitmarket&coin=${pairNameFormatted}`
     }
   }
 ]
