@@ -17,6 +17,23 @@ const pairs = [
     coins: 0.25// C1
   },
   {
+    name: 'BCC-PLN',
+    exchanges: ['Bitmarket', 'Bitbay'],
+    courses: [],
+    exchangePairs: [
+      {
+        buy: 'Bitmarket',
+        sell: 'Bitbay'
+      },
+      {
+        buy: 'Bitbay',
+        sell: 'Bitmarket'
+      }
+    ],
+    percentLimit: 2,
+    coins: 2// C1
+  },
+  {
     name: 'GAME-BTC',
     exchanges: ['Poloniex', 'Bitbay'],
     courses: [],
