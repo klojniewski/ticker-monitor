@@ -7,6 +7,8 @@ const exchangeDrivers = [
     tickerUrl: 'https://poloniex.com/public?command=returnTicker',
     praseTicker: function (ticker, pair) {
       pair = pair.replace('BCC', 'BCH')
+      pair = pair.replace('XLM', 'STR')
+
       pair = pair.split('-')
       const pairName = `${pair[1]}_${pair[0]}`
       const pairTicker = ticker[pairName]
