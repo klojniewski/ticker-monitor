@@ -75,5 +75,40 @@ const exchangeDrivers = [
 
       return `https://api.finvea.pl/ticker.php?market=bitmarket&coin=${pairNameFormatted}`
     }
+  },
+  {
+    id: 4,
+    name: 'Binance',
+    makerFee: 0.1 / 100,
+    takerFee: 0.1 / 100,
+    praseTicker: function (resp, pair) {
+      const ticker = resp.query.results.json
+
+      return {
+        ask: parseFloat(ticker.asks[0].json[0]),
+        bid: parseFloat(ticker.bids[0].json[0])
+      }
+    },
+    getTickerUrl: function (pairName) {
+      const pairNameFormatted = pairName.replace('-', '')
+
+      return `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%20%3D%20%27
+      https%3A%2F%2Fwww.binance.com%2Fapi%2Fv1%2Fdepth%3Fsymbol%3D${pairNameFormatted}%27&format=json&callback=`
+    }
+  },
+  {
+    id: 5,
+    name: 'Abucoins',
+    makerFee: 0,
+    takerFee: 0.1 / 100,
+    praseTicker: function (ticker, pair) {
+      return {
+        ask: parseFloat(ticker.asks[0][0]),
+        bid: parseFloat(ticker.bids[0][0])
+      }
+    },
+    getTickerUrl: function (pairName) {
+      return `https://api.abucoins.com/products/${pairName}/book`
+    }
   }
 ]

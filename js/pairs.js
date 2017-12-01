@@ -1,67 +1,41 @@
 const pairs = [
   {
-    name: 'BTC-PLN',
-    exchanges: ['Bitmarket', 'Bitbay'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Bitmarket',
-        sell: 'Bitbay'
-      },
-      {
-        buy: 'Bitbay',
-        sell: 'Bitmarket'
-      }
-    ],
-    percentLimit: 2,
-    coins: 0.25// C1
-  },
-  {
-    name: 'BCC-PLN',
-    exchanges: ['Bitmarket', 'Bitbay'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Bitmarket',
-        sell: 'Bitbay'
-      },
-      {
-        buy: 'Bitbay',
-        sell: 'Bitmarket'
-      }
-    ],
-    percentLimit: 2,
-    coins: 2// C1
-  },
-  {
-    name: 'GAME-BTC',
-    exchanges: ['Poloniex', 'Bitbay'],
+    name: 'ETH-BTC',
+    exchanges: ['Poloniex', 'Bittrex', 'Abucoins'],
     courses: [],
     exchangePairs: [
       {
         buy: 'Poloniex',
-        sell: 'Bitbay'
+        sell: 'Bittrex'
       },
       {
-        buy: 'Bitbay',
+        buy: 'Bittrex',
         sell: 'Poloniex'
+      },
+      {
+        buy: 'Poloniex',
+        sell: 'Abucoins'
+      },
+      {
+        buy: 'Bittrex',
+        sell: 'Abucoins'
       }
     ],
     percentLimit: 3,
-    coins: 100// C1
+    coins: 10
   },
   {
-    name: 'ETH-BTC',
-    exchanges: ['Poloniex', 'Bitbay'],
+    name: 'DASH-ETH',
+    exchanges: ['Bittrex', 'Binance'],
     courses: [],
     exchangePairs: [
       {
-        buy: 'Poloniex',
-        sell: 'Bitbay'
+        buy: 'Bittrex',
+        sell: 'Binance'
       },
       {
-        buy: 'Bitbay',
-        sell: 'Poloniex'
+        buy: 'Binance',
+        sell: 'Bittrex'
       }
     ],
     percentLimit: 3,
@@ -69,66 +43,47 @@ const pairs = [
   },
   {
     name: 'DASH-BTC',
-    exchanges: ['Poloniex', 'Bitbay'],
+    exchanges: ['Bittrex', 'Binance', 'Poloniex', 'Abucoins'],
     courses: [],
     exchangePairs: [
       {
-        buy: 'Poloniex',
-        sell: 'Bitbay'
+        buy: 'Bittrex',
+        sell: 'Binance'
       },
       {
-        buy: 'Bitbay',
+        buy: 'Binance',
+        sell: 'Bittrex'
+      },
+      {
+        buy: 'Bittrex',
         sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'LTC-BTC',
-    exchanges: ['Poloniex', 'Bitbay'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
-        sell: 'Bitbay'
       },
-      {
-        buy: 'Bitbay',
-        sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'LTC-BTC',
-    exchanges: ['Bitmarket', 'Bitbay'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Bitmarket',
-        sell: 'Bitbay'
-      },
-      {
-        buy: 'Bitbay',
-        sell: 'Bitmarket'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'XLM-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
-    courses: [],
-    exchangePairs: [
       {
         buy: 'Poloniex',
         sell: 'Bittrex'
       },
       {
         buy: 'Bittrex',
+        sell: 'Abucoins'
+      },
+      {
+        buy: 'Binance',
+        sell: 'Abucoins'
+      },
+      {
+        buy: 'Abucoins',
+        sell: 'Poloniex'
+      },
+      {
+        buy: 'Abucoins',
+        sell: 'Bittrex'
+      },
+      {
+        buy: 'Abucoins',
+        sell: 'Binance'
+      },
+      {
+        buy: 'Abucoins',
         sell: 'Poloniex'
       }
     ],
@@ -136,119 +91,17 @@ const pairs = [
     coins: 10
   },
   {
-    name: 'GNT-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
+    name: 'XRP-ETH',
+    exchanges: ['Bittrex', 'Binance'],
     courses: [],
     exchangePairs: [
       {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
+        buy: 'Bittrex',
+        sell: 'Binance'
       },
       {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'ETH-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
+        buy: 'Binance',
         sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'LSK-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'DASH-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'XMR-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'ZEC-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      }
-    ],
-    percentLimit: 3,
-    coins: 10
-  },
-  {
-    name: 'STRAT-BTC',
-    exchanges: ['Poloniex', 'Bittrex'],
-    courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
       }
     ],
     percentLimit: 3,
