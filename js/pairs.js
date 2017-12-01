@@ -22,7 +22,11 @@ const pairs = [
       }
     ],
     percentLimit: 3,
-    coins: 10
+    coins: 10,
+    transferFees: {
+      ETH: 0.00042,
+      BTC: 0.00026848
+    }
   },
   {
     name: 'DASH-ETH',
@@ -39,7 +43,11 @@ const pairs = [
       }
     ],
     percentLimit: 3,
-    coins: 6
+    coins: 6,
+    transferFees: {
+      DASH: 0.01,
+      ETH: 0.00042
+    }
   },
   {
     name: 'DASH-BTC',
@@ -88,7 +96,11 @@ const pairs = [
       }
     ],
     percentLimit: 3,
-    coins: 6
+    coins: 6,
+    transferFees: {
+      DASH: 0.01,
+      BTC: 0.00026848
+    }
   },
   {
     name: 'XRP-ETH',
@@ -105,6 +117,10 @@ const pairs = [
       }
     ],
     percentLimit: 3,
-    coins: 25
+    coins: 25,
+    transferFees: {
+      XRP: 0.15,
+      ETH: 0.00042
+    }
   }
 ]

@@ -72,6 +72,18 @@ const app = new Vue({
         sound.play()
       }
       return hasArbitrage
+    },
+    getTotalTransferFees: function (pair, course) {
+      const finalCurrency = pair.name.split('-')[1]
+      let total = 0
+      for (let key in pair.transferFees) {
+        let fee = pair.transferFees[key]
+        if (key !== finalCurrency) {
+          fee = fee * course
+        }
+        total += fee
+      }
+      return total
     }
   }
 })

@@ -42,7 +42,9 @@
                     <th>Spread:</th>
                     <th>Buy Order Size:</th>
                     <th>Sell Order Size:</th>
-                    <th>P/L net:</th>
+                    <th>P/L gross:</th>
+                    <th title="Fee of transfering crypto from wallets to exchanges">Deposit fees:</th>
+                    <th title="Fee of transfering crypto back to wallets">Widrawal fees:</th>
                   </tr>
                   <tr v-for="exchange in pair.exchangePairs">
                     <td>
@@ -81,6 +83,12 @@
                         PROFIT
                       </span>
                       <span class="label label-danger" v-else>LOSS</span>
+                    </td>
+                    <td>
+                      {{ getTotalTransferFees(pair, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
+                    </td>
+                    <td>
+                      {{ getTotalTransferFees(pair, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
                     </td>
                   </tr>
                 </table>
