@@ -39,7 +39,7 @@ const pairs = [
       }
     ],
     percentLimit: 3,
-    coins: 10
+    coins: 6
   },
   {
     name: 'DASH-BTC',
@@ -88,7 +88,7 @@ const pairs = [
       }
     ],
     percentLimit: 3,
-    coins: 10
+    coins: 6
   },
   {
     name: 'XRP-ETH',
@@ -105,6 +105,6 @@ const pairs = [
       }
     ],
     percentLimit: 3,
-    coins: 10
+    coins: 25
   }
 ]

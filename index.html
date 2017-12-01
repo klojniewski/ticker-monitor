@@ -37,13 +37,12 @@
                   <tr>
                     <th>Buy on:</th>
                     <th>Sell on:</th>
-                    <th>Buy Price (ask):</th>
-                    <th>Sell Price (bid):</th>
-                    <th>Exchanges Spread:</th>
-                    <th>Coins on market:</th>
-                    <th>Coins to sell (excluded fee):</th>
-                    <th>Cost spent:</th>
-                    <th>SELL without free:</th>
+                    <th>Buy Price:</th>
+                    <th>Sell Price:</th>
+                    <th>Spread:</th>
+                    <th>Buy Order Size:</th>
+                    <th>Sell Order Size:</th>
+                    <th>P/L net:</th>
                   </tr>
                   <tr v-for="exchange in pair.exchangePairs">
                     <td>
@@ -53,10 +52,10 @@
                       {{ exchange.sell }}
                     </td>
                     <td>
-                      {{  getCourseByExchangeName(pair, exchange.buy).ask | 8places | currency(pair.name) }}
+                      {{  getCourseByExchangeName(pair, exchange.buy).ask | 8places | buyCurrency(pair.name) }}
                     </td>
                     <td>
-                      {{  getCourseByExchangeName(pair, exchange.sell).bid | 8places | currency(pair.name) }}
+                      {{  getCourseByExchangeName(pair, exchange.sell).bid | 8places | buyCurrency(pair.name) }}
                     </td>
                     <td>
                       {{ getExchangesSpread(pair, exchange.buy, exchange.sell) }}%
@@ -68,16 +67,13 @@
                       </span>
                     </td>
                     <td>
-                      {{ pair.coins }}
+                      {{ pair.coins | sellCurrency(pair.name) }}
                     </td>
                     <td>
-                      {{ getSellQty(pair.coins, exchange.buy) }}
+                      {{ getSellQty(pair.coins, exchange.buy) | sellCurrency(pair.name) }}
                     </td>
                     <td>
-                      {{ getSellCost(pair, exchange.buy) }}
-                    </td>
-                    <td>
-                      {{ getPLValue(pair, exchange.buy, exchange.sell) | currency(pair.name)}}
+                      {{ getPLValue(pair, exchange.buy, exchange.sell) | buyCurrency(pair.name)}}
                       <span
                         class="label label-success"
                         v-if="getPLValue(pair, exchange.buy, exchange.sell) > 0"

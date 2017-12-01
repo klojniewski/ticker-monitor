@@ -2,8 +2,12 @@ const sound = new Audio('./sounds/tick.wav')
 
 Vue.filter('8places', value => parseFloat(value).toFixed(8))
 
-Vue.filter('currency', (value, pairName) => {
+Vue.filter('buyCurrency', (value, pairName) => {
   return `${parseFloat(value).toFixed(8)} ${pairName.split('-')[1]}`
+})
+
+Vue.filter('sellCurrency', (value, pairName) => {
+  return `${parseFloat(value).toFixed(8)} ${pairName.split('-')[0]}`
 })
 
 const app = new Vue({
@@ -36,7 +40,7 @@ const app = new Vue({
       return exchangeDrivers.filter(exchange => exchange.name.toLowerCase() === exchangeName)[0]
     },
     // F2
-    getSellCost: function (pair, exchangeName) {
+    getBuyOrderValue: function (pair, exchangeName) {
       const value = pair.coins * this.getCourseByExchangeName(pair, exchangeName).ask
       return value.toFixed(8)
     },
@@ -58,7 +62,7 @@ const app = new Vue({
 
       const sellFee = sellValue * this.getTakerFee(sellExchangeName)
 
-      const value = sellValue - sellFee - this.getSellCost(pair, buyExchangeName)
+      const value = sellValue - sellFee - this.getBuyOrderValue(pair, buyExchangeName)
 
       return value.toFixed(8)
     },
