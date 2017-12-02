@@ -35,16 +35,25 @@
               <div class="col-md-12">
                 <table class="table table-dark" v-if="pair.courses.length">
                   <tr>
-                    <th>Buy on:</th>
-                    <th>Sell on:</th>
-                    <th>Buy Price:</th>
-                    <th>Sell Price:</th>
+                    <th colspan="2">Exchanges</th>
+                    <th colspan="2">Prices</th>
                     <th>Spread:</th>
-                    <th>Buy Order Size:</th>
-                    <th>Sell Order Size:</th>
-                    <th>P/L gross:</th>
-                    <th title="Fee of transfering crypto from wallets to exchanges">Deposit fees:</th>
-                    <th title="Fee of transfering crypto back to wallets">Widrawal fees:</th>
+                    <th colspan="2">Order Sizes</th>
+                    <th colspan="2">Transfer Fees</th>
+                    <th colspan="2">Profit / Loss</th>
+                  </tr>
+                  <tr>
+                    <th>Buy</th>
+                    <th>Sell</th>
+                    <th>Buy</th>
+                    <th>Sell</th>
+                    <th>Spread</th>
+                    <th>Buy</th>
+                    <th>Sell</th>
+                    <th title="Fee of transfering crypto from wallets to exchanges">Wallets -> Exchanges</th>
+                    <th title="Fee of transfering crypto back to wallets">Exchanges -> Wallets</th>
+                    <th>Gross</th>
+                    <th>Net</th>
                   </tr>
                   <tr v-for="exchange in pair.exchangePairs">
                     <td>
@@ -75,6 +84,12 @@
                       {{ getSellQty(pair.coins, exchange.buy) | sellCurrency(pair.name) }}
                     </td>
                     <td>
+                      {{ getTotalTransferFees(pair, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
+                    </td>
+                    <td>
+                      {{ getTotalWithdrawalFees(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
+                    </td>
+                    <td>
                       {{ getPLValue(pair, exchange.buy, exchange.sell) | buyCurrency(pair.name)}}
                       <span
                         class="label label-success"
@@ -85,10 +100,14 @@
                       <span class="label label-danger" v-else>LOSS</span>
                     </td>
                     <td>
-                      {{ getTotalTransferFees(pair, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
-                    </td>
-                    <td>
-                      {{ getTotalTransferFees(pair, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
+                      {{ getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name)}}
+                      <span
+                        class="label label-success"
+                        v-if="getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) > 0"
+                      >
+                        PROFIT
+                      </span>
+                      <span class="label label-danger" v-else>LOSS</span>
                     </td>
                   </tr>
                 </table>

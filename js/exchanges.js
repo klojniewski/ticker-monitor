@@ -25,10 +25,10 @@ const exchangeDrivers = [
       return this.tickerUrl
     },
     withdrawal: {
-      BTC: 0.00010000,
-      ETH: 0.00500000,
-      DASH: 0.01000000,
-      XRP: 0.15000000
+      BTC: 0.0001,
+      ETH: 0.005,
+      DASH: 0.01,
+      XRP: 0.15
     }
   },
   {
@@ -47,7 +47,7 @@ const exchangeDrivers = [
       return `https://bitbay.net/API/Public/${pairName}/ticker.json`
     },
     withdrawal: {
-      BTC: 0.00045000,
+      BTC: 0.00045,
       ETH: 0.00126,
       DASH: 0.001
     }
@@ -70,10 +70,10 @@ const exchangeDrivers = [
       return `https://api.finvea.pl/ticker.php?market=bittrex&coin=${pairName}`
     },
     withdrawal: {
-      BTC: 0.00100000,
-      ETH: 0.00200000,
-      DASH: 0.00200000,
-      XRP: 5.00000000
+      BTC: 0.001,
+      ETH: 0.002,
+      DASH: 0.00,
+      XRP: 5
     }
   },
   {

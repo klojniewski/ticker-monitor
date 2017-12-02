@@ -74,16 +74,38 @@ const app = new Vue({
       return hasArbitrage
     },
     getTotalTransferFees: function (pair, course) {
+      // transfer fees needs to be printed in final currency to calculate P/L
       const finalCurrency = pair.name.split('-')[1]
       let total = 0
       for (let key in pair.transferFees) {
         let fee = pair.transferFees[key]
+        // if fee is not in final currency - calculate to the final
         if (key !== finalCurrency) {
           fee = fee * course
         }
         total += fee
       }
       return total
+    },
+    getTotalWithdrawalFees: function (pair, buyExchangeName, sellExchangeName, course) {
+      const pairNameArray = pair.name.split('-')
+      const exchangeBuyCurrency = pairNameArray[0]
+      const exchangeSellCurrency = pairNameArray[1]
+
+      const exchangeBuy = this.getExchangeByName(buyExchangeName)
+      const exchangeSell = this.getExchangeByName(sellExchangeName)
+
+      const exchangeBuyWithdrawal = exchangeBuy.withdrawal[exchangeBuyCurrency] * course
+      const exchangeSellWithdrawal = exchangeSell.withdrawal[exchangeSellCurrency]
+
+      return exchangeBuyWithdrawal + exchangeSellWithdrawal
+    },
+    getPLNetValue: function (pair, buyExchangeName, sellExchangeName, course) {
+      const LPgross = this.getPLValue(pair, buyExchangeName, sellExchangeName)
+      const depositFees = this.getTotalTransferFees(pair, course)
+      const withdrawalFees = this.getTotalWithdrawalFees(pair, buyExchangeName, sellExchangeName, course)
+
+      return LPgross - withdrawalFees - depositFees
     }
   }
 })
