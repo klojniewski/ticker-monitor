@@ -112,4 +112,4 @@ const app = new Vue({
 
 setInterval(() => {
   app.$store.dispatch('init')
-}, 2 * 1000)// 2 seconds
+}, 3 * 1000)// 3 seconds
