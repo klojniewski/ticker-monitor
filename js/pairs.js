@@ -3,24 +3,6 @@ const pairs = [
     name: 'ETH-BTC',
     exchanges: ['Poloniex', 'Bittrex', 'Abucoins'],
     courses: [],
-    exchangePairs: [
-      {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      },
-      {
-        buy: 'Poloniex',
-        sell: 'Abucoins'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Abucoins'
-      }
-    ],
     percentLimit: 3,
     coins: 10,
     transferFees: {
@@ -32,16 +14,6 @@ const pairs = [
     name: 'DASH-ETH',
     exchanges: ['Bittrex', 'Binance'],
     courses: [],
-    exchangePairs: [
-      {
-        buy: 'Bittrex',
-        sell: 'Binance'
-      },
-      {
-        buy: 'Binance',
-        sell: 'Bittrex'
-      }
-    ],
     percentLimit: 3,
     coins: 6,
     transferFees: {
@@ -53,48 +25,6 @@ const pairs = [
     name: 'DASH-BTC',
     exchanges: ['Bittrex', 'Binance', 'Poloniex', 'Abucoins'],
     courses: [],
-    exchangePairs: [
-      {
-        buy: 'Bittrex',
-        sell: 'Binance'
-      },
-      {
-        buy: 'Binance',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Poloniex'
-      },
-      {
-        buy: 'Poloniex',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Bittrex',
-        sell: 'Abucoins'
-      },
-      {
-        buy: 'Binance',
-        sell: 'Abucoins'
-      },
-      {
-        buy: 'Abucoins',
-        sell: 'Poloniex'
-      },
-      {
-        buy: 'Abucoins',
-        sell: 'Bittrex'
-      },
-      {
-        buy: 'Abucoins',
-        sell: 'Binance'
-      },
-      {
-        buy: 'Abucoins',
-        sell: 'Poloniex'
-      }
-    ],
     percentLimit: 3,
     coins: 6,
     transferFees: {
@@ -106,16 +36,6 @@ const pairs = [
     name: 'XRP-ETH',
     exchanges: ['Bittrex', 'Binance'],
     courses: [],
-    exchangePairs: [
-      {
-        buy: 'Bittrex',
-        sell: 'Binance'
-      },
-      {
-        buy: 'Binance',
-        sell: 'Bittrex'
-      }
-    ],
     percentLimit: 3,
     coins: 25,
     transferFees: {
@@ -124,3 +44,17 @@ const pairs = [
     }
   }
 ]
+
+pairs.forEach(pair => {
+  pair.exchangePairs = []
+  pair.exchanges.forEach(exchangeBuy => {
+    pair.exchanges.forEach(exchangeSell => {
+      if (exchangeBuy !== exchangeSell) {
+        pair.exchangePairs.push({
+          buy: exchangeBuy,
+          sell: exchangeSell
+        })
+      }
+    })
+  })
+})
