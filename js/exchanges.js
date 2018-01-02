@@ -28,7 +28,8 @@ const exchangeDrivers = [
       BTC: 0.0001,
       ETH: 0.005,
       DASH: 0.01,
-      XRP: 0.15
+      XRP: 0.15,
+      XLM: 1
     }
   },
   {
@@ -71,9 +72,11 @@ const exchangeDrivers = [
     },
     withdrawal: {
       BTC: 0.001,
-      ETH: 0.002,
-      DASH: 0.00,
-      XRP: 5
+      ETH: 0.001,
+      DASH: 0.002,
+      XRP: 1,
+      XLM: 0.01,
+      NEO: 0
     }
   },
   {
@@ -103,27 +106,25 @@ const exchangeDrivers = [
     name: 'Binance',
     makerFee: 0.1 / 100,
     takerFee: 0.1 / 100,
-    praseTicker: function (resp, pair) {
-      const ticker = resp.query.results.json
-
+    praseTicker: function (resp) {
       return {
-        ask: parseFloat(ticker.asks[0].json[0]),
-        bid: parseFloat(ticker.bids[0].json[0])
+        ask: parseFloat(resp.askPrice),
+        bid: parseFloat(resp.bidPrice)
       }
     },
     getTickerUrl: function (pairName) {
       const pairNameFormatted = pairName.replace('-', '')
 
-      return `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%20%3D%20%27
-      https%3A%2F%2Fwww.binance.com%2Fapi%2Fv1%2Fdepth%3Fsymbol%3D${pairNameFormatted}%27&format=json&callback=`
+      return `https://api.finvea.pl/ticker.php?market=binance&coin=${pairNameFormatted}`
     },
     withdrawal: {
-      BTC: 0.0005,
+      BTC: 0.001,
       BCH: 0.0005,
-      ETH: 0.005,
+      ETH: 0.01,
       DASH: 0.002,
       XRP: 0.15,
-      LTC: 0.001
+      NEO: 0,
+      XLM: 0.01
     }
   },
   {

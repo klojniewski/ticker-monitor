@@ -21,6 +21,10 @@
           <input id="id-percent" type="number" v-model="percentLimit">
         </div>
         <div>
+          <label for="id-btcpln">BTC/PLN Price:</label>
+          <input id="id-btcpln" type="number" v-model="btcplnPrice">
+        </div>
+        <div>
           <label for="id-sounds">Play Sounds:</label>
           <input id="id-sounds" type="checkbox" id="checkbox" v-model="playSounds">
         </div>
@@ -100,7 +104,9 @@
                       <span class="label label-danger" v-else>LOSS</span>
                     </td>
                     <td>
-                      {{ getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name)}}
+                      <span :title="getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) * btcplnPrice">
+                        {{ getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name)}}
+                      </span>
                       <span
                         class="label label-success"
                         v-if="getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) > 0"

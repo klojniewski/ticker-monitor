@@ -42,6 +42,28 @@ const pairs = [
       XRP: 0.15,
       ETH: 0.00042
     }
+  },
+  {
+    name: 'XLM-BTC',
+    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+    courses: [],
+    percentLimit: 3,
+    coins: 10000,
+    transferFees: {
+      XLM: 0.01,
+      BTC: 0.00026848
+    }
+  },
+  {
+    name: 'NEO-ETH',
+    exchanges: ['Bittrex', 'Binance'],
+    courses: [],
+    percentLimit: 3,
+    coins: 10000,
+    transferFees: {
+      NEO: 0.01,
+      ETH: 0.00042
+    }
   }
 ]
 

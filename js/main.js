@@ -16,6 +16,7 @@ const app = new Vue({
   data: {
     exchangeDrivers,
     percentLimit: 3,
+    btcplnPrice: 55000,
     playSounds: true
   },
   computed: {
