@@ -48,7 +48,7 @@ const pairs = [
     exchanges: ['Bittrex', 'Binance', 'Poloniex'],
     courses: [],
     percentLimit: 3,
-    coins: 5000,
+    coins: 10000,
     transferFees: {
       XLM: 0.00001,
       BTC: 0.001
