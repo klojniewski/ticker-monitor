@@ -25,11 +25,11 @@ const exchangeDrivers = [
       return this.tickerUrl
     },
     withdrawal: {
-      BTC: 0.0001,
+      BTC: 0.0005,
       ETH: 0.005,
       DASH: 0.01,
       XRP: 0.15,
-      XLM: 1
+      XLM: 0.00001
     }
   },
   {

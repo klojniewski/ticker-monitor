@@ -102,11 +102,12 @@ const app = new Vue({
       return exchangeBuyWithdrawal + exchangeSellWithdrawal
     },
     getPLNetValue: function (pair, buyExchangeName, sellExchangeName, course) {
-      const LPgross = this.getPLValue(pair, buyExchangeName, sellExchangeName)
+      const PLGross = parseFloat(this.getPLValue(pair, buyExchangeName, sellExchangeName))
       const depositFees = this.getTotalTransferFees(pair, course)
       const withdrawalFees = this.getTotalWithdrawalFees(pair, buyExchangeName, sellExchangeName, course)
+      const PLNet = PLGross - withdrawalFees - depositFees
 
-      return LPgross - withdrawalFees - depositFees
+      return PLNet
     }
   }
 })

@@ -51,7 +51,7 @@ const pairs = [
     coins: 5000,
     transferFees: {
       XLM: 0.00001,
-      BTC: 0.00026848
+      BTC: 0.001
     }
   },
   {
