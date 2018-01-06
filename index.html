@@ -5,9 +5,10 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <title>Arbitrage Monitoring</title>
+    <title>Cryptocurrency Arbitrage Monitor</title>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vuex"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -15,25 +16,27 @@
   <body>
     <div id="app" v-cloak>
       <div class="col-md-12">
-        <h3>Options:</h3>
-        <div>
-          <label for="id-percent">Arbitrage Percentage Limit:</label>
-          <input id="id-percent" type="number" v-model="percentLimit">
-        </div>
-        <div>
-          <label for="id-btcpln">BTC/PLN Price:</label>
-          <input id="id-btcpln" type="number" v-model="btcplnPrice">
-        </div>
-        <div>
-          <label for="id-sounds">Play Sounds:</label>
-          <input id="id-sounds" type="checkbox" id="checkbox" v-model="playSounds">
+        <div class="hidden-xs">
+          <h3>Options:</h3>
+          <div>
+            <label for="id-percent">Arbitrage Percentage Limit:</label>
+            <input id="id-percent" type="number" v-model="percentLimit">
+          </div>
+          <div>
+            <label for="id-btcpln">BTC/PLN Price:</label>
+            <input id="id-btcpln" type="number" v-model="btcplnPrice">
+          </div>
+          <div>
+            <label for="id-sounds">Play Sounds:</label>
+            <input id="id-sounds" type="checkbox" id="checkbox" v-model="playSounds">
+          </div>
         </div>
       </div>
       <div class="container-fluid">
         <div class="row" v-for="pair in pairs">
           <div class="col-md-12">
             <h1>{{ pair.name }}</h1>
-            <div>
+            <div class="hidden-xs">
               <label>Coins:</label>&nbsp;
               <input type="number" v-model="pair.coins">
               {{ pair.name.split('-')[0] }}
@@ -43,26 +46,26 @@
             <div class="row">
               <div class="col-md-12">
                 <table class="table table-dark" v-if="pair.courses.length">
-                  <tr>
+                  <tr class="hidden-xs">
                     <th colspan="2">Exchanges</th>
-                    <th colspan="2">Prices</th>
+                    <th colspan="2" class="hidden-xs">Prices</th>
                     <th>Spread:</th>
-                    <th colspan="2">Order Sizes</th>
-                    <th colspan="2">Transfer Fees</th>
-                    <th colspan="2">Profit / Loss</th>
+                    <th class="hidden-xs" colspan="2">Order Sizes</th>
+                    <th class="hidden-xs" colspan="2">Transfer Fees</th>
+                    <th class="hidden-xs" colspan="2">Profit / Loss</th>
                   </tr>
                   <tr>
                     <th>Buy</th>
                     <th>Sell</th>
-                    <th>Buy</th>
-                    <th>Sell</th>
+                    <th class="hidden-xs">Buy</th>
+                    <th class="hidden-xs">Sell</th>
                     <th>Spread</th>
-                    <th>Buy</th>
-                    <th>Sell</th>
-                    <th title="Fee of transfering crypto from wallets to exchanges">Deposit</th>
-                    <th title="Fee of transfering crypto back to wallets">Withdrawal</th>
-                    <th>Gross</th>
-                    <th>Net</th>
+                    <th class="hidden-xs">Buy</th>
+                    <th class="hidden-xs">Sell</th>
+                    <th class="hidden-xs" title="Fee of transfering crypto from wallets to exchanges">Deposit</th>
+                    <th class="hidden-xs" title="Fee of transfering crypto back to wallets">Withdrawal</th>
+                    <th class="hidden-xs">Gross</th>
+                    <th class="hidden-xs">Net</th>
                   </tr>
                   <tr v-for="exchange in pair.exchangePairs">
                     <td>
@@ -75,34 +78,34 @@
                         {{ exchange.sell }}
                       </a>
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       {{ getCourseByExchangeName(pair, exchange.buy).ask | 8places | buyCurrency(pair.name) }}
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       {{ getCourseByExchangeName(pair, exchange.sell).bid | 8places | buyCurrency(pair.name) }}
                     </td>
                     <td>
                       {{ getExchangesSpread(pair, exchange.buy, exchange.sell) }}%
                       <span
-                        class="badge badge-success"
+                        class="label label-warning"
                         v-if="hasArbitrage(getExchangesSpread(pair, exchange.buy, exchange.sell))"
                       >
                         ARBITRAGE
                       </span>
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       {{ pair.coins | sellCurrency(pair.name) }}
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       {{ getSellQty(pair.coins, exchange.buy) | sellCurrency(pair.name) }}
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       {{ getTotalTransferFees(pair, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       {{ getTotalWithdrawalFees(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       {{ getPLValue(pair, exchange.buy, exchange.sell) | buyCurrency(pair.name)}}
                       <span
                         class="label label-success"
@@ -112,7 +115,7 @@
                       </span>
                       <span class="label label-danger" v-else>LOSS</span>
                     </td>
-                    <td>
+                    <td class="hidden-xs">
                       <span :title="getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) * btcplnPrice">
                         {{ getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name)}}
                       </span>
