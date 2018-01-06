@@ -15,7 +15,7 @@ const pairs = [
     exchanges: ['Bittrex', 'Binance'],
     courses: [],
     percentLimit: 3,
-    coins: 6,
+    coins: 5,
     transferFees: {
       DASH: 0.01,
       ETH: 0.00042

@@ -33,6 +33,11 @@
         <div class="row" v-for="pair in pairs">
           <div class="col-md-12">
             <h1>{{ pair.name }}</h1>
+            <div>
+              <label>Coins:</label>&nbsp;
+              <input type="number" v-model="pair.coins">
+              {{ pair.name.split('-')[0] }}
+            </div>
           </div>
           <div class="col-md-12">
             <div class="row">
