@@ -61,16 +61,20 @@
                   </tr>
                   <tr v-for="exchange in pair.exchangePairs">
                     <td>
-                      {{ exchange.buy }}
+                      <a target="_blank" :href="getExchangeLink(exchange.buy, pair)">
+                        {{ exchange.buy }}
+                      </a>
                     </td>
                     <td>
-                      {{ exchange.sell }}
+                      <a target="_blank" :href="getExchangeLink(exchange.sell, pair)">
+                        {{ exchange.sell }}
+                      </a>
                     </td>
                     <td>
-                      {{  getCourseByExchangeName(pair, exchange.buy).ask | 8places | buyCurrency(pair.name) }}
+                      {{ getCourseByExchangeName(pair, exchange.buy).ask | 8places | buyCurrency(pair.name) }}
                     </td>
                     <td>
-                      {{  getCourseByExchangeName(pair, exchange.sell).bid | 8places | buyCurrency(pair.name) }}
+                      {{ getCourseByExchangeName(pair, exchange.sell).bid | 8places | buyCurrency(pair.name) }}
                     </td>
                     <td>
                       {{ getExchangesSpread(pair, exchange.buy, exchange.sell) }}%

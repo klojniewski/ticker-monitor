@@ -24,6 +24,14 @@ const exchangeDrivers = [
     getTickerUrl: function () {
       return this.tickerUrl
     },
+    getExchangeUrl: function (pairName) {
+      pairName = pairName.replace('BCC', 'BCH')
+      pairName = pairName.replace('XLM', 'STR')
+
+      pairName = pairName.split('-')
+      const pairNameParsed = `${pairName[1]}_${pairName[0]}`
+      return `https://poloniex.com/exchange#${pairNameParsed}`
+    },
     withdrawal: {
       BTC: 0.0005,
       ETH: 0.005,
@@ -47,6 +55,9 @@ const exchangeDrivers = [
       pairName = pairName.replace('-', '')
       return `https://bitbay.net/API/Public/${pairName}/ticker.json`
     },
+    getExchangeUrl: function () {
+      return '#'
+    },
     withdrawal: {
       BTC: 0.00045,
       ETH: 0.00126,
@@ -69,6 +80,11 @@ const exchangeDrivers = [
       const pairArray = pairNameOrygial.split('-')
       const pairName = `${pairArray[1]}-${pairArray[0]}`
       return `https://api.finvea.pl/ticker.php?market=bittrex&coin=${pairName}`
+    },
+    getExchangeUrl: function (pairName) {
+      const pairArray = pairName.split('-')
+      const pairNameFormatted = `${pairArray[1]}-${pairArray[0]}`
+      return `https://bittrex.com/Market/Index?MarketName=${pairNameFormatted}`
     },
     withdrawal: {
       BTC: 0.001,
@@ -95,6 +111,10 @@ const exchangeDrivers = [
 
       return `https://api.finvea.pl/ticker.php?market=bitmarket&coin=${pairNameFormatted}`
     },
+    getExchangeUrl: function (pairName) {
+      const pairNameFormatted = pairName.replace('-', '')
+      return `https://www.bitmarket.pl/market.php?market=${pairNameFormatted}`
+    },
     withdrawal: {
       BTC: 0.0008,
       LTC: 0.005,
@@ -116,6 +136,10 @@ const exchangeDrivers = [
       const pairNameFormatted = pairName.replace('-', '')
 
       return `https://api.finvea.pl/ticker.php?market=binance&coin=${pairNameFormatted}`
+    },
+    getExchangeUrl: function (pairName) {
+      const pairNameFormatted = pairName.replace('-', '_')
+      return `https://binance.com/trade.html?symbol=${pairNameFormatted}`
     },
     withdrawal: {
       BTC: 0.001,
@@ -140,6 +164,9 @@ const exchangeDrivers = [
     },
     getTickerUrl: function (pairName) {
       return `https://api.abucoins.com/products/${pairName}/book`
+    },
+    getExchangeUrl: function (pairName) {
+      return `https://abucoins.com/pl/trade/${pairName}`
     },
     withdrawal: {
       BTC: 0.0002,

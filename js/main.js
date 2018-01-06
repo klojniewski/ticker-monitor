@@ -108,6 +108,10 @@ const app = new Vue({
       const PLNet = PLGross - withdrawalFees - depositFees
 
       return PLNet
+    },
+    getExchangeLink: function (exchangeName, pair) {
+      const pairName = pair.name
+      return this.getExchangeByName(exchangeName).getExchangeUrl(pairName)
     }
   }
 })
