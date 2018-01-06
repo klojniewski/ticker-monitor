@@ -75,7 +75,7 @@ const exchangeDrivers = [
       ETH: 0.001,
       DASH: 0.002,
       XRP: 1,
-      XLM: 0.01,
+      XLM: 0.006,
       NEO: 0
     }
   },
