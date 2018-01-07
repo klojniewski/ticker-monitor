@@ -11,6 +11,17 @@ const pairs = [
     }
   },
   {
+    name: 'XLM-ETH',
+    exchanges: ['Bittrex', 'Binance'],
+    courses: [],
+    percentLimit: 3,
+    coins: 10000,
+    transferFees: {
+      XLM: 0.00001,
+      ETH: 0.00042
+    }
+  },
+  {
     name: 'ETH-BTC',
     exchanges: ['Poloniex', 'Bittrex', 'Abucoins'],
     courses: [],
