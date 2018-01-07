@@ -17,6 +17,7 @@ const app = new Vue({
     exchangeDrivers,
     percentLimit: 3,
     btcplnPrice: 55000,
+    ethplnPrice: 3400,
     playSounds: true
   },
   computed: {
@@ -108,6 +109,18 @@ const app = new Vue({
       const PLNet = PLGross - withdrawalFees - depositFees
 
       return PLNet
+    },
+    getPLNetValuePLN: function (PLNet, pairName) {
+      const buyCurrency = pairName.split('-')[1]
+
+      let profit = `${PLNet} ${buyCurrency}`
+      if (buyCurrency === 'BTC') {
+        profit = `${PLNet * this.btcplnPrice} PLN`
+      } else if (buyCurrency === 'ETH') {
+        profit = `${PLNet * this.ethplnPrice} PLN`
+      }
+
+      return profit
     },
     getExchangeLink: function (exchangeName, pair) {
       const pairName = pair.name

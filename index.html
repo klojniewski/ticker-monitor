@@ -27,6 +27,10 @@
             <input id="id-btcpln" type="number" v-model="btcplnPrice">
           </div>
           <div>
+            <label for="id-ethpln">ETH/PLN Price:</label>
+            <input id="id-ethpln" type="number" v-model="ethplnPrice">
+          </div>
+          <div>
             <label for="id-sounds">Play Sounds:</label>
             <input id="id-sounds" type="checkbox" id="checkbox" v-model="playSounds">
           </div>
@@ -65,7 +69,7 @@
                     <th class="hidden-xs" title="Fee of transfering crypto from wallets to exchanges">Deposit</th>
                     <th class="hidden-xs" title="Fee of transfering crypto back to wallets">Withdrawal</th>
                     <th class="hidden-xs">Gross</th>
-                    <th class="hidden-xs">Net</th>
+                    <th>Net</th>
                   </tr>
                   <tr v-for="exchange in pair.exchangePairs">
                     <td>
@@ -115,8 +119,8 @@
                       </span>
                       <span class="label label-danger" v-else>LOSS</span>
                     </td>
-                    <td class="hidden-xs">
-                      <span :title="getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) * btcplnPrice">
+                    <td>
+                      <span :title="getPLNetValuePLN(getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid), pair.name)">
                         {{ getPLNetValue(pair, exchange.buy, exchange.sell, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name)}}
                       </span>
                       <span
