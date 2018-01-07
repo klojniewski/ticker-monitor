@@ -176,5 +176,31 @@ const exchangeDrivers = [
       XRP: 0.02,
       LTC: 0.001
     }
+  },
+  {
+    id: 6,
+    name: 'Bitfinex',
+    makerFee: 0.1 / 100,
+    takerFee: 0.2 / 100,
+    praseTicker: function (ticker, pair) {
+      return {
+        ask: parseFloat(ticker.ask),
+        bid: parseFloat(ticker.bid)
+      }
+    },
+    getTickerUrl: function (pairName) {
+      return `https://api.bitfinex.com/v1/pubticker/${pairName}/book`
+    },
+    getExchangeUrl: function (pairName) {
+      return `https://www.bitfinex.com/t/${pairName}`
+    },
+    withdrawal: {
+      BTC: 0.0008,
+      BCH: 0.0001,
+      ETH: 0.01,
+      DASH: 0.01,
+      XRP: 0.02,
+      LTC: 0.001
+    }
   }
 ]
