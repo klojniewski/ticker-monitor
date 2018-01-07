@@ -18,7 +18,8 @@ const app = new Vue({
     percentLimit: 3,
     btcplnPrice: 55000,
     ethplnPrice: 3400,
-    playSounds: true
+    playSounds: true,
+    freezeApp: false
   },
   computed: {
     pairs () {
@@ -130,5 +131,7 @@ const app = new Vue({
 })
 
 setInterval(() => {
-  app.$store.dispatch('init')
+  if (!app.freezeApp) {
+    app.$store.dispatch('init')
+  }
 }, 3 * 1000)// 3 seconds
