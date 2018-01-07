@@ -116,9 +116,9 @@ const app = new Vue({
 
       let profit = `${PLNet} ${buyCurrency}`
       if (buyCurrency === 'BTC') {
-        profit = `${PLNet * this.btcplnPrice} PLN`
+        profit = `${(PLNet * this.btcplnPrice).toFixed(2)} PLN`
       } else if (buyCurrency === 'ETH') {
-        profit = `${PLNet * this.ethplnPrice} PLN`
+        profit = `${(PLNet * this.ethplnPrice).toFixed(2)} PLN`
       }
 
       return profit

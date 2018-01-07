@@ -25,7 +25,7 @@ const pairs = [
     name: 'ETH-BTC',
     exchanges: ['Poloniex', 'Bittrex', 'Abucoins', 'Binance'],
     courses: [],
-    percentLimit: 3,
+    percentLimit: 2,
     coins: 10,
     transferFees: {
       ETH: 0.00042,
