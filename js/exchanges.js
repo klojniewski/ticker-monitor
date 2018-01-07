@@ -88,7 +88,7 @@ const exchangeDrivers = [
     },
     withdrawal: {
       BTC: 0.001,
-      ETH: 0.001,
+      ETH: 0.006,
       DASH: 0.002,
       XRP: 1,
       XLM: 0.006,
