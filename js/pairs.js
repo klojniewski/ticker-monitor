@@ -23,7 +23,7 @@ const pairs = [
   },
   {
     name: 'ETH-BTC',
-    exchanges: ['Poloniex', 'Bittrex', 'Abucoins', 'Binance'],
+    exchanges: ['Poloniex', 'Bittrex', 'Binance'],
     courses: [],
     percentLimit: 2,
     coins: 10,
@@ -45,7 +45,7 @@ const pairs = [
   },
   {
     name: 'DASH-BTC',
-    exchanges: ['Bittrex', 'Binance', 'Poloniex', 'Abucoins'],
+    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
     courses: [],
     percentLimit: 3,
     coins: 6,
