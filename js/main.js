@@ -134,4 +134,4 @@ setInterval(() => {
   if (!app.freezeApp) {
     app.$store.dispatch('init')
   }
-}, 3 * 1000)// 3 seconds
+}, 4 * 1000)// 4 seconds

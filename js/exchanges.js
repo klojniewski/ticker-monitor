@@ -202,5 +202,31 @@ const exchangeDrivers = [
       XRP: 0.02,
       LTC: 0.001
     }
+  },
+  {
+    id: 7,
+    name: 'Kucoin',
+    makerFee: 0.1 / 100,
+    takerFee: 0.1 / 100,
+    praseTicker: function (ticker, pair) {
+      return {
+        ask: parseFloat(ticker.data.sell),
+        bid: parseFloat(ticker.data.buy)
+      }
+    },
+    getTickerUrl: function (pairName) {
+      return `https://api.kucoin.com/v1/open/tick?symbol=${pairName}`
+    },
+    getExchangeUrl: function (pairName) {
+      return `https://www.kucoin.com/#/trade.pro/${pairName}`
+    },
+    withdrawal: {
+      BTC: 0.0005,
+      BCH: 0.0005,
+      ETH: 0.01,
+      DASH: 0.002,
+      NEO: 0,
+      LTC: 0.001
+    }
   }
 ]

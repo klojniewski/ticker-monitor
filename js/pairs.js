@@ -23,7 +23,7 @@ const pairs = [
   },
   {
     name: 'ETH-BTC',
-    exchanges: ['Poloniex', 'Bittrex', 'Binance'],
+    exchanges: ['Poloniex', 'Bittrex', 'Binance', 'Kucoin'],
     courses: [],
     percentLimit: 2,
     coins: 10,
@@ -67,10 +67,10 @@ const pairs = [
   },
   {
     name: 'NEO-ETH',
-    exchanges: ['Bittrex', 'Binance'],
+    exchanges: ['Bittrex', 'Binance', 'Kucoin'],
     courses: [],
     percentLimit: 3,
-    coins: 10000,
+    coins: 50,
     transferFees: {
       NEO: 0.01,
       ETH: 0.00042
