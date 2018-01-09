@@ -85,7 +85,8 @@ pairs.forEach(pair => {
       if (exchangeBuy !== exchangeSell) {
         pair.exchangePairs.push({
           buy: exchangeBuy,
-          sell: exchangeSell
+          sell: exchangeSell,
+          soundAlerts: false
         })
       }
     })

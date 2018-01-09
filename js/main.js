@@ -15,10 +15,9 @@ const app = new Vue({
   store,
   data: {
     exchangeDrivers,
-    percentLimit: 3,
+    percentLimit: 2,
     btcplnPrice: 54000,
     ethplnPrice: 4050,
-    playSounds: true,
     freezeApp: false
   },
   computed: {
@@ -69,9 +68,9 @@ const app = new Vue({
 
       return value.toFixed(8)
     },
-    hasArbitrage: function (spread) {
+    hasArbitrage: function (spread, playSounds) {
       const hasArbitrage = spread > this.percentLimit
-      if (hasArbitrage && this.playSounds) {
+      if (hasArbitrage && playSounds) {
         sound.play()
       }
       return hasArbitrage

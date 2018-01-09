@@ -31,10 +31,6 @@
             <input id="id-ethpln" type="number" v-model="ethplnPrice">
           </div>
           <div>
-            <label for="id-sounds">Play Sounds:</label>
-            <input id="id-sounds" type="checkbox" id="checkbox" v-model="playSounds">
-          </div>
-          <div>
             <label for="id-freeze">Freeze:</label>
             <input id="id-freeze" type="checkbox" id="checkbox" v-model="freezeApp">
           </div>
@@ -44,7 +40,7 @@
         <div class="row" v-for="pair in pairs">
           <div class="col-md-12">
             <h1>{{ pair.name }}</h1>
-            <div class="hidden-xs">
+            <div>
               <label>Coins:</label>&nbsp;
               <input type="number" v-model="pair.coins">
               {{ pair.name.split('-')[0] }}
@@ -55,9 +51,10 @@
               <div class="col-md-12">
                 <table class="table table-dark" v-if="pair.courses.length">
                   <tr class="hidden-xs">
+                    <th rowspan="2" class="hidden-xs">Sound Alerts</th>
                     <th colspan="2">Exchanges</th>
                     <th colspan="2" class="hidden-xs">Prices</th>
-                    <th>Spread:</th>
+                    <th>&nbsp;</th>
                     <th class="hidden-xs" colspan="2">Order Sizes</th>
                     <th class="hidden-xs" colspan="2">Transfer Fees</th>
                     <th class="hidden-xs" colspan="2">Profit / Loss</th>
@@ -76,6 +73,9 @@
                     <th>Net</th>
                   </tr>
                   <tr v-for="exchange in pair.exchangePairs">
+                    <td class="hidden-xs">
+                      <input type="checkbox" v-model="exchange.soundAlerts" />
+                    </td>
                     <td>
                       <a target="_blank" :href="getExchangeLink(exchange.buy, pair)">
                         {{ exchange.buy }}
@@ -96,7 +96,7 @@
                       {{ getExchangesSpread(pair, exchange.buy, exchange.sell) }}%
                       <span
                         class="label label-warning"
-                        v-if="hasArbitrage(getExchangesSpread(pair, exchange.buy, exchange.sell))"
+                        v-if="hasArbitrage(getExchangesSpread(pair, exchange.buy, exchange.sell), exchange.soundAlerts)"
                       >
                         ARBITRAGE
                       </span>
