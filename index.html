@@ -43,6 +43,7 @@
                 <label>Coins:</label>&nbsp;
                 <input type="number" v-model="pair.coins">
                 {{ pair.name.split('-')[0] }}
+                ({{ pair.coins * getCourseByExchangeName(pair, pair.exchangePairs[0].buy).ask | 8places | buyCurrency(pair.name) }})
               </div>
               <div class="col-md-3">
                 <label>Percentage limit:</label>&nbsp;
