@@ -68,8 +68,8 @@ const app = new Vue({
 
       return value.toFixed(8)
     },
-    hasArbitrage: function (spread, playSounds) {
-      const hasArbitrage = spread > this.percentLimit
+    hasArbitrage: function (spread, playSounds, percentLimit) {
+      const hasArbitrage = spread > percentLimit
       if (hasArbitrage && playSounds) {
         sound.play()
       }

@@ -18,21 +18,19 @@
       <div class="col-md-12">
         <div class="hidden-xs">
           <h3>Options:</h3>
-          <div>
-            <label for="id-percent">Arbitrage Percentage Limit:</label>
-            <input id="id-percent" type="number" v-model="percentLimit">
-          </div>
-          <div>
-            <label for="id-btcpln">BTC/PLN Price:</label>
-            <input id="id-btcpln" type="number" v-model="btcplnPrice">
-          </div>
-          <div>
-            <label for="id-ethpln">ETH/PLN Price:</label>
-            <input id="id-ethpln" type="number" v-model="ethplnPrice">
-          </div>
-          <div>
-            <label for="id-freeze">Freeze:</label>
-            <input id="id-freeze" type="checkbox" id="checkbox" v-model="freezeApp">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="id-btcpln">BTC/PLN Price:</label>
+              <input id="id-btcpln" type="number" v-model="btcplnPrice">
+            </div>
+            <div class="col-md-4">
+              <label for="id-ethpln">ETH/PLN Price:</label>
+              <input id="id-ethpln" type="number" v-model="ethplnPrice">
+            </div>
+            <div class="col-md-4">
+              <label for="id-freeze">Freeze the App:</label>&nbsp;
+              <input id="id-freeze" type="checkbox" id="checkbox" v-model="freezeApp">
+            </div>
           </div>
         </div>
       </div>
@@ -40,10 +38,16 @@
         <div class="row" v-for="pair in pairs">
           <div class="col-md-12">
             <h1>{{ pair.name }}</h1>
-            <div>
-              <label>Coins:</label>&nbsp;
-              <input type="number" v-model="pair.coins">
-              {{ pair.name.split('-')[0] }}
+            <div class="row">
+              <div class="col-md-4">
+                <label>Coins:</label>&nbsp;
+                <input type="number" v-model="pair.coins">
+                {{ pair.name.split('-')[0] }}
+              </div>
+              <div class="col-md-3">
+                <label>Percentage limit:</label>&nbsp;
+                <input class="hidden-xs" type="range" min="0.5" step="0.1" max="5" v-model="pair.percentLimit"> {{ pair.percentLimit }} %
+              </div>
             </div>
           </div>
           <div class="col-md-12">
@@ -96,7 +100,7 @@
                       {{ getExchangesSpread(pair, exchange.buy, exchange.sell) }}%
                       <span
                         class="label label-warning"
-                        v-if="hasArbitrage(getExchangesSpread(pair, exchange.buy, exchange.sell), exchange.soundAlerts)"
+                        v-if="hasArbitrage(getExchangesSpread(pair, exchange.buy, exchange.sell), exchange.soundAlerts, pair.percentLimit)"
                       >
                         ARBITRAGE
                       </span>
