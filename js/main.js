@@ -29,20 +29,17 @@ const app = new Vue({
     this.$store.dispatch('init')
   },
   methods: {
-    // E2
-    getSellQty: function (coins, exchangeName) {
-      const value = coins / (this.getTakerFee(exchangeName) + 1)
-      return value.toFixed(8)
+    getSellQty: function (coins) {
+      return coins.toFixed(8)
     },
     getBuyQty: function (pair, exchangeName) {
       const coins = parseFloat(pair.coins)
-      let value = coins * this.getTakerFee(exchangeName) + coins
       const buyCurrency = pair.name.split('-')[0]
       const exchangeBuy = this.getExchangeByName(exchangeName)
 
-      if (exchangeBuy.upfrontFee) {
-        value = coins
-      }
+      const value = exchangeBuy.upfrontFee
+        ? coins
+        : coins * this.getTakerFee(exchangeName) + coins
 
       return (value + exchangeBuy.withdrawal[buyCurrency]).toFixed(8)
     },
@@ -55,7 +52,8 @@ const app = new Vue({
     },
     // F2
     getBuyOrderValue: function (pair, exchangeName) {
-      const value = this.getBuyQty(pair, exchangeName) * this.getCourseByExchangeName(pair, exchangeName).ask
+      const askPrice = this.getCourseByExchangeName(pair, exchangeName).ask
+      const value = this.getBuyQty(pair, exchangeName) * askPrice
       return value.toFixed(8)
     },
     getCourseByExchangeName: function (pair, exchangeName) {
@@ -71,7 +69,7 @@ const app = new Vue({
     },
     // PLValue - profit/loss value
     getPLValue: function (pair, buyExchangeName, sellExchangeName) {
-      const coinsToSell = this.getSellQty(pair.coins, buyExchangeName)
+      const coinsToSell = this.getSellQty(pair.coins)
       const sellExchange = this.getCourseByExchangeName(pair, sellExchangeName)
       const sellValue = coinsToSell * sellExchange.bid
 
