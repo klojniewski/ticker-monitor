@@ -34,6 +34,18 @@ const app = new Vue({
       const value = coins / (this.getTakerFee(exchangeName) + 1)
       return value.toFixed(8)
     },
+    getBuyQty: function (pair, exchangeName) {
+      const coins = parseFloat(pair.coins)
+      let value = coins * this.getTakerFee(exchangeName) + coins
+      const buyCurrency = pair.name.split('-')[0]
+      const exchangeBuy = this.getExchangeByName(exchangeName)
+
+      if (exchangeBuy.upfrontFee) {
+        value = coins
+      }
+
+      return (value + exchangeBuy.withdrawal[buyCurrency]).toFixed(8)
+    },
     getTakerFee: function (exchangeName) {
       return this.getExchangeByName(exchangeName).takerFee
     },
@@ -43,7 +55,7 @@ const app = new Vue({
     },
     // F2
     getBuyOrderValue: function (pair, exchangeName) {
-      const value = pair.coins * this.getCourseByExchangeName(pair, exchangeName).ask
+      const value = this.getBuyQty(pair, exchangeName) * this.getCourseByExchangeName(pair, exchangeName).ask
       return value.toFixed(8)
     },
     getCourseByExchangeName: function (pair, exchangeName) {

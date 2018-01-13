@@ -107,10 +107,10 @@
                       </span>
                     </td>
                     <td class="hidden-xs">
-                      {{ pair.coins | sellCurrency(pair.name) }}
+                      {{ getBuyQty(pair, exchange.buy) | sellCurrency(pair.name) }}
                     </td>
                     <td class="hidden-xs">
-                      {{ getSellQty(pair.coins, exchange.buy) | sellCurrency(pair.name) }}
+                      {{ pair.coins | sellCurrency(pair.name) }}
                     </td>
                     <td class="hidden-xs">
                       {{ getTotalTransferFees(pair, getCourseByExchangeName(pair, exchange.sell).bid) | buyCurrency(pair.name) }}

@@ -4,6 +4,7 @@ const exchangeDrivers = [
     name: 'Poloniex',
     makerFee: 0.25 / 100,
     takerFee: 0.25 / 100,
+    upfrontFee: false,
     tickerUrl: 'https://poloniex.com/public?command=returnTicker',
     praseTicker: function (ticker, pair) {
       pair = pair.replace('BCC', 'BCH')
@@ -45,6 +46,7 @@ const exchangeDrivers = [
     name: 'BitBay',
     makerFee: 0.43 / 100,
     takerFee: 0.43 / 100,
+    upfrontFee: false,
     praseTicker: function (ticker, pair) {
       return {
         ask: ticker.ask,
@@ -69,6 +71,7 @@ const exchangeDrivers = [
     name: 'Bittrex',
     makerFee: 0.25 / 100,
     takerFee: 0.25 / 100,
+    upfrontFee: true,
     praseTicker: function (ticker, pair) {
       const responseTicker = ticker.result
       return {
@@ -100,6 +103,7 @@ const exchangeDrivers = [
     name: 'Bitmarket',
     makerFee: 0.45 / 100,
     takerFee: 0.45 / 100,
+    upfrontFee: false,
     praseTicker: function (ticker, pair) {
       return {
         ask: parseFloat(ticker.ask),
@@ -126,6 +130,7 @@ const exchangeDrivers = [
     name: 'Binance',
     makerFee: 0.1 / 100,
     takerFee: 0.1 / 100,
+    upfrontFee: false,
     praseTicker: function (resp) {
       return {
         ask: parseFloat(resp.askPrice),
@@ -156,6 +161,7 @@ const exchangeDrivers = [
     name: 'Abucoins',
     makerFee: 0,
     takerFee: 0.1 / 100,
+    upfrontFee: false,
     praseTicker: function (ticker, pair) {
       return {
         ask: parseFloat(ticker.asks[0][0]),
@@ -182,6 +188,7 @@ const exchangeDrivers = [
     name: 'Bitfinex',
     makerFee: 0.1 / 100,
     takerFee: 0.2 / 100,
+    upfrontFee: false,
     praseTicker: function (ticker, pair) {
       return {
         ask: parseFloat(ticker.ask),
@@ -208,6 +215,7 @@ const exchangeDrivers = [
     name: 'Kucoin',
     makerFee: 0.1 / 100,
     takerFee: 0.1 / 100,
+    upfrontFee: false,
     praseTicker: function (ticker, pair) {
       return {
         ask: parseFloat(ticker.data.sell),
