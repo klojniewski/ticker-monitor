@@ -14,7 +14,7 @@ const pairs = [
     name: 'XLM-ETH',
     exchanges: ['Bittrex', 'Binance'],
     courses: [],
-    percentLimit: 3,
+    percentLimit: 2,
     coins: 10000,
     transferFees: {
       XLM: 0.00001,
