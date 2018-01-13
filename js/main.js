@@ -126,11 +126,17 @@ const app = new Vue({
     getPLNetValuePLN: function (PLNet, pairName) {
       const buyCurrency = pairName.split('-')[1]
 
-      let profit = `${PLNet} ${buyCurrency}`
-      if (buyCurrency === 'BTC') {
-        profit = `${(PLNet * this.btcplnPrice).toFixed(2)} PLN`
-      } else if (buyCurrency === 'ETH') {
-        profit = `${(PLNet * this.ethplnPrice).toFixed(2)} PLN`
+      let profit
+
+      switch (buyCurrency) {
+        case 'BTC':
+          profit = `${(PLNet * this.btcplnPrice).toFixed(2)} PLN`
+          break
+        case 'ETH':
+          profit = `${(PLNet * this.ethplnPrice).toFixed(2)} PLN`
+          break
+        default:
+          profit = `${PLNet} ${buyCurrency}`
       }
 
       return profit
