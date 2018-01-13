@@ -30,6 +30,7 @@ const app = new Vue({
   },
   methods: {
     getSellQty: function (coins) {
+      coins = parseFloat(coins)
       return coins.toFixed(8)
     },
     getBuyQty: function (pair, exchangeName) {
@@ -50,17 +51,31 @@ const app = new Vue({
       exchangeName = exchangeName.toLowerCase()
       return exchangeDrivers.filter(exchange => exchange.name.toLowerCase() === exchangeName)[0]
     },
-    // F2
     getBuyOrderValue: function (pair, exchangeName) {
+      const exchangeBuy = this.getExchangeByName(exchangeName)
       const askPrice = this.getCourseByExchangeName(pair, exchangeName).ask
-      const value = this.getBuyQty(pair, exchangeName) * askPrice
+
+      const buyQty = this.getBuyQty(pair, exchangeName)
+
+      const value = exchangeBuy.upfrontFee
+        ? buyQty * askPrice * (1 + exchangeBuy.takerFee)
+        : buyQty * askPrice
+
       return value.toFixed(8)
+    },
+    getSellOrderValue: function (pair, exchangeName) {
+      const coinsToSell = this.getSellQty(pair.coins)
+      const sellExchange = this.getCourseByExchangeName(pair, exchangeName)
+      const sellValue = coinsToSell * sellExchange.bid
+
+      const sellFee = sellValue * this.getTakerFee(exchangeName)
+
+      return sellValue - sellFee
     },
     getCourseByExchangeName: function (pair, exchangeName) {
       const exchange = pair.courses.filter(exchange => exchange.exchange === exchangeName)[0]
       return exchange ? exchange.ticker : 0
     },
-    // G2
     getExchangesSpread: function (pair, buyExchangeName, sellExchangeName) {
       const buyExchange = this.getCourseByExchangeName(pair, buyExchangeName)
       const sellExchange = this.getCourseByExchangeName(pair, sellExchangeName)
@@ -69,13 +84,10 @@ const app = new Vue({
     },
     // PLValue - profit/loss value
     getPLValue: function (pair, buyExchangeName, sellExchangeName) {
-      const coinsToSell = this.getSellQty(pair.coins)
-      const sellExchange = this.getCourseByExchangeName(pair, sellExchangeName)
-      const sellValue = coinsToSell * sellExchange.bid
+      const sellOrderValue = this.getSellOrderValue(pair, sellExchangeName)
+      const buyOrderValue = this.getBuyOrderValue(pair, buyExchangeName)
 
-      const sellFee = sellValue * this.getTakerFee(sellExchangeName)
-
-      const value = sellValue - sellFee - this.getBuyOrderValue(pair, buyExchangeName)
+      const value = sellOrderValue - buyOrderValue
 
       return value.toFixed(8)
     },
