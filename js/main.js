@@ -59,7 +59,8 @@ const app = new Vue({
       return value.toFixed(8)
     },
     getCourseByExchangeName: function (pair, exchangeName) {
-      return pair.courses.filter(exchange => exchange.exchange === exchangeName)[0].ticker
+      const exchange = pair.courses.filter(exchange => exchange.exchange === exchangeName)[0]
+      return exchange ? exchange.ticker : 0
     },
     // G2
     getExchangesSpread: function (pair, buyExchangeName, sellExchangeName) {
