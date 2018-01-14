@@ -38,7 +38,8 @@ const exchangeDrivers = [
       ETH: 0.005,
       DASH: 0.01,
       XRP: 0.15,
-      XLM: 0.00001
+      XLM: 0.00001,
+      XEM: 15
     }
   },
   {
@@ -95,7 +96,9 @@ const exchangeDrivers = [
       DASH: 0.002,
       XRP: 1,
       XLM: 0.006,
-      NEO: 0
+      NEO: 0,
+      XEM: 4,
+      BTG: 0.001
     }
   },
   {
@@ -153,7 +156,8 @@ const exchangeDrivers = [
       DASH: 0.002,
       XRP: 0.15,
       NEO: 0,
-      XLM: 0.01
+      XLM: 0.01,
+      BTG: 0.001
     }
   },
   {
