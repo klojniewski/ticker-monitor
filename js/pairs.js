@@ -33,25 +33,14 @@ const pairs = [
     }
   },
   {
-    name: 'DASH-ETH',
-    exchanges: ['Bittrex', 'Binance'],
+    name: 'XEM-BTC',
+    exchanges: ['Bittrex', 'Poloniex'],
     courses: [],
     percentLimit: 3,
-    coins: 5,
+    coins: 25,
     transferFees: {
-      DASH: 0.01,
-      ETH: 0.00099
-    }
-  },
-  {
-    name: 'DASH-BTC',
-    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
-    courses: [],
-    percentLimit: 3,
-    coins: 6,
-    transferFees: {
-      DASH: 0.01,
-      BTC: 0.00026848
+      XEM: 0.01,
+      BTC: 0.00099
     }
   },
   {
@@ -62,6 +51,39 @@ const pairs = [
     coins: 25,
     transferFees: {
       XRP: 0.15,
+      ETH: 0.00099
+    }
+  },
+  {
+    name: 'XRP-BTC',
+    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+    courses: [],
+    percentLimit: 3,
+    coins: 25,
+    transferFees: {
+      XRP: 0.15,
+      BTC: 0.00099
+    }
+  },
+  {
+    name: 'BTG-BTC',
+    exchanges: ['Bittrex', 'Binance'],
+    courses: [],
+    percentLimit: 3,
+    coins: 25,
+    transferFees: {
+      BTG: 0.00099,
+      BTC: 0.00099
+    }
+  },
+  {
+    name: 'NEO-BTC',
+    exchanges: ['Bittrex', 'Binance'],
+    courses: [],
+    percentLimit: 3,
+    coins: 25,
+    transferFees: {
+      NEO: 0.01,
       ETH: 0.00099
     }
   },
