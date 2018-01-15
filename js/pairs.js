@@ -66,6 +66,50 @@ const pairs = [
     }
   },
   {
+    name: 'ETC-BTC',
+    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+    courses: [],
+    percentLimit: 3,
+    coins: 160,
+    transferFees: {
+      ETC: 0.001,
+      BTC: 0.00099
+    }
+  },
+  {
+    name: 'ETC-ETH',
+    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+    courses: [],
+    percentLimit: 3,
+    coins: 160,
+    transferFees: {
+      ETC: 0.001,
+      ETH: 0.00099
+    }
+  },
+  {
+    name: 'ADA-BTC',
+    exchanges: ['Bittrex', 'Binance'],
+    courses: [],
+    percentLimit: 3,
+    coins: 160,
+    transferFees: {
+      ADA: 0.001,
+      BTC: 0.00099
+    }
+  },
+  {
+    name: 'ADA-ETH',
+    exchanges: ['Bittrex', 'Binance'],
+    courses: [],
+    percentLimit: 3,
+    coins: 160,
+    transferFees: {
+      ADA: 0.001,
+      ETH: 0.00099
+    }
+  },
+  {
     name: 'BTG-BTC',
     exchanges: ['Bittrex', 'Binance'],
     courses: [],

@@ -35,11 +35,14 @@ const exchangeDrivers = [
     },
     withdrawal: {
       BTC: 0.0005,
+      BCH: 0.0001,
       ETH: 0.005,
+      ETC: 0.01,
       DASH: 0.01,
       XRP: 0.15,
       XLM: 0.00001,
-      XEM: 15
+      XEM: 15,
+      LTC: 0.001
     }
   },
   {
@@ -91,14 +94,17 @@ const exchangeDrivers = [
       return `https://bittrex.com/Market/Index?MarketName=${pairNameFormatted}`
     },
     withdrawal: {
+      ADA: 0.2,
       BTC: 0.001,
       ETH: 0.006,
+      ETC: 0.01,
       DASH: 0.002,
       XRP: 1,
       XLM: 0.006,
       NEO: 0,
       XEM: 4,
-      BTG: 0.001
+      BTG: 0.001,
+      LTC: 0.001
     }
   },
   {
@@ -150,6 +156,7 @@ const exchangeDrivers = [
       return `https://binance.com/trade.html?symbol=${pairNameFormatted}`
     },
     withdrawal: {
+      ADA: 0.2,
       BTC: 0.001,
       BCH: 0.0005,
       ETH: 0.01,
@@ -157,7 +164,9 @@ const exchangeDrivers = [
       XRP: 0.15,
       NEO: 0,
       XLM: 0.01,
-      BTG: 0.001
+      BTG: 0.001,
+      ETC: 0.01,
+      LTC: 0.01
     }
   },
   {
