@@ -122,7 +122,7 @@ const pairs = [
   },
   {
     name: 'NEO-BTC',
-    exchanges: ['Bittrex', 'Binance'],
+    exchanges: ['Bittrex', 'Binance', 'Kucoin'],
     courses: [],
     percentLimit: 3,
     coins: 25,
@@ -133,7 +133,7 @@ const pairs = [
   },
   {
     name: 'NEO-ETH',
-    exchanges: ['Bittrex', 'Binance'],
+    exchanges: ['Bittrex', 'Binance', 'Kucoin'],
     courses: [],
     percentLimit: 3,
     coins: 50,
