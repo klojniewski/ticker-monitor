@@ -20,8 +20,9 @@ const actions = {
           pair: pair.name,
           exchange
         }
-
-        requests.push(exchangeRequest)
+        if (exchangeDriver.active) {
+          requests.push(exchangeRequest)
+        }
       })
     })
 
@@ -40,13 +41,16 @@ const mutations = {
     state.pairs.forEach(pair => {
       const pairCourses = []
       pair.exchanges.forEach(exchange => {
-        const pairExchangeCourse = tickers.filter(ticker => {
-          return ticker.pair === pair.name && ticker.exchange === exchange
-        })[0]
-        pairCourses.push({
-          exchange: pairExchangeCourse.exchange,
-          ticker: pairExchangeCourse.ticker
-        })
+        const exchangeDriver = getExchangeDriverByName(exchange)
+        if (exchangeDriver.active) {
+          const pairExchangeCourse = tickers.filter(ticker => {
+            return ticker.pair === pair.name && ticker.exchange === exchange
+          })[0]
+          pairCourses.push({
+            exchange: pairExchangeCourse.exchange,
+            ticker: pairExchangeCourse.ticker
+          })
+        }
       })
       pair.courses = pairCourses
     })

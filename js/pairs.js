@@ -23,7 +23,7 @@ const pairs = [
   },
   {
     name: 'ETH-BTC',
-    exchanges: ['Poloniex', 'Bittrex', 'Binance', 'Kucoin'],
+    exchanges: ['Poloniex', 'Bittrex', 'Binance', 'Bitbay', 'Kucoin'],
     courses: [],
     percentLimit: 2,
     coins: 10,
@@ -133,7 +133,7 @@ const pairs = [
   },
   {
     name: 'NEO-ETH',
-    exchanges: ['Bittrex', 'Binance', 'Kucoin'],
+    exchanges: ['Bittrex', 'Binance'],
     courses: [],
     percentLimit: 3,
     coins: 50,
@@ -144,11 +144,17 @@ const pairs = [
   }
 ]
 
+const getExchangeDriverByNameTest = function (exchangeName) {
+  return exchangeDrivers.filter(exchange => exchange.name.toLowerCase() === exchangeName.toLowerCase())[0]
+}
+
 pairs.forEach(pair => {
   pair.exchangePairs = []
   pair.exchanges.forEach(exchangeBuy => {
+    const exchangeBuyObject = getExchangeDriverByNameTest(exchangeBuy)
     pair.exchanges.forEach(exchangeSell => {
-      if (exchangeBuy !== exchangeSell) {
+      const exchangeSellObject = getExchangeDriverByNameTest(exchangeSell)
+      if (exchangeBuy !== exchangeSell && exchangeBuyObject.active && exchangeSellObject.active) {
         pair.exchangePairs.push({
           buy: exchangeBuy,
           sell: exchangeSell,

@@ -16,8 +16,8 @@ const app = new Vue({
   data: {
     exchangeDrivers,
     percentLimit: 2,
-    btcplnPrice: 50000,
-    ethplnPrice: 4500,
+    btcplnPrice: 36000,
+    ethplnPrice: 3200,
     freezeApp: false
   },
   computed: {
@@ -154,6 +154,11 @@ const app = new Vue({
     getExchangeLink: function (exchangeName, pair) {
       const pairName = pair.name
       return this.getExchangeByName(exchangeName).getExchangeUrl(pairName)
+    },
+    isActiveExchange: function (exchangeBuyName, exchangeSellName) {
+      const exchangeBuy = this.getExchangeByName(exchangeBuyName)
+      const exchangeSell = this.getExchangeByName(exchangeSellName)
+      return exchangeBuy.active && exchangeSell.active
     }
   }
 })

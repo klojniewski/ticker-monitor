@@ -43,7 +43,8 @@ const exchangeDrivers = [
       XLM: 0.00001,
       XEM: 15,
       LTC: 0.001
-    }
+    },
+    active: true
   },
   {
     id: 1,
@@ -68,7 +69,8 @@ const exchangeDrivers = [
       BTC: 0.00045,
       ETH: 0.00126,
       DASH: 0.001
-    }
+    },
+    active: true
   },
   {
     id: 2,
@@ -105,7 +107,8 @@ const exchangeDrivers = [
       XEM: 4,
       BTG: 0.001,
       LTC: 0.001
-    }
+    },
+    active: true
   },
   {
     id: 3,
@@ -132,7 +135,8 @@ const exchangeDrivers = [
       BTC: 0.0008,
       LTC: 0.005,
       BCH: 0.0008
-    }
+    },
+    active: true
   },
   {
     id: 4,
@@ -167,7 +171,8 @@ const exchangeDrivers = [
       BTG: 0.001,
       ETC: 0.01,
       LTC: 0.01
-    }
+    },
+    active: true
   },
   {
     id: 5,
@@ -194,7 +199,8 @@ const exchangeDrivers = [
       DASH: 0.01,
       XRP: 0.02,
       LTC: 0.001
-    }
+    },
+    active: true
   },
   {
     id: 6,
@@ -209,7 +215,8 @@ const exchangeDrivers = [
       }
     },
     getTickerUrl: function (pairName) {
-      return `https://api.bitfinex.com/v1/pubticker/${pairName}/book`
+      const pairNameFormatted = pairName.replace('-', '')
+      return `https://api.bitfinex.com/v1/pubticker/${pairNameFormatted}`
     },
     getExchangeUrl: function (pairName) {
       return `https://www.bitfinex.com/t/${pairName}`
@@ -221,7 +228,8 @@ const exchangeDrivers = [
       DASH: 0.01,
       XRP: 0.02,
       LTC: 0.001
-    }
+    },
+    active: true
   },
   {
     id: 7,
@@ -248,6 +256,7 @@ const exchangeDrivers = [
       DASH: 0.002,
       NEO: 0,
       LTC: 0.001
-    }
+    },
+    active: true
   }
 ]
