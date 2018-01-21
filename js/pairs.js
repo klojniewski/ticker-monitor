@@ -32,94 +32,94 @@ const pairs = [
       BTC: 0.00026848
     }
   },
-  {
-    name: 'XEM-BTC',
-    exchanges: ['Bittrex', 'Poloniex'],
-    courses: [],
-    percentLimit: 3,
-    coins: 5000,
-    transferFees: {
-      XEM: 15,
-      BTC: 0.00099
-    }
-  },
-  {
-    name: 'XRP-ETH',
-    exchanges: ['Bittrex', 'Binance'],
-    courses: [],
-    percentLimit: 3,
-    coins: 25,
-    transferFees: {
-      XRP: 0.15,
-      ETH: 0.00099
-    }
-  },
-  {
-    name: 'XRP-BTC',
-    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
-    courses: [],
-    percentLimit: 3,
-    coins: 25,
-    transferFees: {
-      XRP: 0.15,
-      BTC: 0.00099
-    }
-  },
-  {
-    name: 'ETC-BTC',
-    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
-    courses: [],
-    percentLimit: 3,
-    coins: 160,
-    transferFees: {
-      ETC: 0.001,
-      BTC: 0.00099
-    }
-  },
-  {
-    name: 'ETC-ETH',
-    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
-    courses: [],
-    percentLimit: 3,
-    coins: 160,
-    transferFees: {
-      ETC: 0.001,
-      ETH: 0.00099
-    }
-  },
-  {
-    name: 'ADA-BTC',
-    exchanges: ['Bittrex', 'Binance'],
-    courses: [],
-    percentLimit: 3,
-    coins: 160,
-    transferFees: {
-      ADA: 0.001,
-      BTC: 0.00099
-    }
-  },
-  {
-    name: 'ADA-ETH',
-    exchanges: ['Bittrex', 'Binance'],
-    courses: [],
-    percentLimit: 3,
-    coins: 160,
-    transferFees: {
-      ADA: 0.001,
-      ETH: 0.00099
-    }
-  },
-  {
-    name: 'BTG-BTC',
-    exchanges: ['Bittrex', 'Binance'],
-    courses: [],
-    percentLimit: 3,
-    coins: 25,
-    transferFees: {
-      BTG: 0.00099,
-      BTC: 0.00099
-    }
-  },
+  // {
+  //   name: 'XEM-BTC',
+  //   exchanges: ['Bittrex', 'Poloniex'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 5000,
+  //   transferFees: {
+  //     XEM: 15,
+  //     BTC: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'XRP-ETH',
+  //   exchanges: ['Bittrex', 'Binance'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 25,
+  //   transferFees: {
+  //     XRP: 0.15,
+  //     ETH: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'XRP-BTC',
+  //   exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 25,
+  //   transferFees: {
+  //     XRP: 0.15,
+  //     BTC: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'ETC-BTC',
+  //   exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 160,
+  //   transferFees: {
+  //     ETC: 0.001,
+  //     BTC: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'ETC-ETH',
+  //   exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 160,
+  //   transferFees: {
+  //     ETC: 0.001,
+  //     ETH: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'ADA-BTC',
+  //   exchanges: ['Bittrex', 'Binance'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 160,
+  //   transferFees: {
+  //     ADA: 0.001,
+  //     BTC: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'ADA-ETH',
+  //   exchanges: ['Bittrex', 'Binance'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 160,
+  //   transferFees: {
+  //     ADA: 0.001,
+  //     ETH: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'BTG-BTC',
+  //   exchanges: ['Bittrex', 'Binance'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 25,
+  //   transferFees: {
+  //     BTG: 0.00099,
+  //     BTC: 0.00099
+  //   }
+  // },
   {
     name: 'NEO-BTC',
     exchanges: ['Bittrex', 'Binance', 'Kucoin'],

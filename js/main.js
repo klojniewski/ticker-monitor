@@ -133,20 +133,19 @@ const app = new Vue({
 
       return PLNet
     },
-    getPLNetValuePLN: function (PLNet, pairName) {
-      const buyCurrency = pairName.split('-')[1]
-
+    getPLNValue: function (cryptoValue, pairName) {
       let profit
+      const buyCurrency = pairName.split('-')[1]
 
       switch (buyCurrency) {
         case 'BTC':
-          profit = `${(PLNet * this.btcplnPrice).toFixed(2)} PLN`
+          profit = `${(cryptoValue * this.btcplnPrice).toFixed(2)} PLN`
           break
         case 'ETH':
-          profit = `${(PLNet * this.ethplnPrice).toFixed(2)} PLN`
+          profit = `${(cryptoValue * this.ethplnPrice).toFixed(2)} PLN`
           break
         default:
-          profit = `${PLNet} ${buyCurrency}`
+          profit = `${cryptoValue} ${buyCurrency}`
       }
 
       return profit
