@@ -244,7 +244,7 @@ const exchangeDrivers = [
       }
     },
     getTickerUrl: function (pairName) {
-      return `https://api.kucoin.com/v1/open/tick?symbol=${pairName}`
+      return `https://api.finvea.pl/ticker.php?market=kucoin&coin=${pairName}`
     },
     getExchangeUrl: function (pairName) {
       return `https://www.kucoin.com/#/trade.pro/${pairName}`
