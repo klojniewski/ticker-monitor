@@ -162,8 +162,11 @@ const app = new Vue({
   }
 })
 
+const elApp = document.getElementById('app')
+const refreshRate = parseInt(elApp.dataset.refresh_rate, 10)
+
 setInterval(() => {
   if (!app.freezeApp) {
     app.$store.dispatch('init')
   }
-}, 4 * 1000)// 4 seconds
+}, refreshRate * 1000)// x seconds

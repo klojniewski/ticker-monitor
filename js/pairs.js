@@ -23,7 +23,7 @@ const pairs = [
   },
   {
     name: 'ETH-BTC',
-    exchanges: ['Poloniex', 'Bittrex', 'Binance', 'Bitbay', 'Kucoin'],
+    exchanges: ['Poloniex', 'Bittrex', 'Binance'],
     courses: [],
     percentLimit: 2,
     coins: 10,
@@ -31,7 +31,7 @@ const pairs = [
       ETH: 0.00099,
       BTC: 0.00026848
     }
-  },
+  }
   // {
   //   name: 'XEM-BTC',
   //   exchanges: ['Bittrex', 'Poloniex'],
@@ -120,28 +120,28 @@ const pairs = [
   //     BTC: 0.00099
   //   }
   // },
-  {
-    name: 'NEO-BTC',
-    exchanges: ['Bittrex', 'Binance', 'Kucoin'],
-    courses: [],
-    percentLimit: 3,
-    coins: 25,
-    transferFees: {
-      NEO: 0.01,
-      ETH: 0.00099
-    }
-  },
-  {
-    name: 'NEO-ETH',
-    exchanges: ['Bittrex', 'Binance', 'Kucoin'],
-    courses: [],
-    percentLimit: 3,
-    coins: 50,
-    transferFees: {
-      NEO: 0.01,
-      ETH: 0.00099
-    }
-  }
+  // {
+  //   name: 'NEO-BTC',
+  //   exchanges: ['Bittrex', 'Binance', 'Kucoin'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 25,
+  //   transferFees: {
+  //     NEO: 0.01,
+  //     ETH: 0.00099
+  //   }
+  // },
+  // {
+  //   name: 'NEO-ETH',
+  //   exchanges: ['Bittrex', 'Binance', 'Kucoin'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 50,
+  //   transferFees: {
+  //     NEO: 0.01,
+  //     ETH: 0.00099
+  //   }
+  // }
 ]
 
 const getExchangeDriverByNameTest = function (exchangeName) {
