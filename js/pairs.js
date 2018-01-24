@@ -3,7 +3,7 @@ const pairs = [
     name: 'XLM-BTC',
     exchanges: ['Bittrex', 'Binance', 'Poloniex'],
     courses: [],
-    percentLimit: 3,
+    percentLimit: 1.5,
     coins: 10000,
     transferFees: {
       XLM: 0.00001,
