@@ -36,19 +36,6 @@
         </div>
       </div>
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <h3>Exchanges to Watch:</h3>
-            <ul>
-              <li v-for="exchange in exchangeDrivers">
-                    <label>{{ exchange.name }}</label>&nbsp;
-                    <input type="checkbox" id="checkbox" v-model="exchange.active">
-              </li>
-            </ul>
-          </div>
-        </div>
-    </div>
-      <div class="container-fluid">
         <div class="row" v-for="pair in pairs">
           <div class="col-md-12">
             <h1>{{ pair.name }}</h1>
