@@ -42,7 +42,8 @@ const exchangeDrivers = [
       XRP: 0.15,
       XLM: 0.00001,
       XEM: 15,
-      LTC: 0.001
+      LTC: 0.001,
+      USDT: 25
     },
     active: true
   },
@@ -106,7 +107,8 @@ const exchangeDrivers = [
       NEO: 0,
       XEM: 4,
       BTG: 0.001,
-      LTC: 0.001
+      LTC: 0.001,
+      USDT: 25
     },
     active: true
   },
@@ -170,7 +172,8 @@ const exchangeDrivers = [
       XLM: 0.01,
       BTG: 0.001,
       ETC: 0.01,
-      LTC: 0.01
+      LTC: 0.01,
+      USDT: 23.8
     },
     active: true
   },
@@ -255,6 +258,38 @@ const exchangeDrivers = [
       ETH: 0.01,
       DASH: 0.002,
       NEO: 0,
+      LTC: 0.001
+    },
+    active: true
+  },
+  {
+    id: 8,
+    name: 'Kraken',
+    makerFee: 0 / 100,
+    takerFee: 0 / 100,
+    upfrontFee: false,
+    praseTicker: function (ticker, pair) {
+      const result = ticker.result['XXLMXXBT']
+      return {
+        ask: parseFloat(result.a[0]),
+        bid: parseFloat(result.b[0])
+      }
+    },
+    getTickerUrl: function (pairName) {
+      let pairNameFormatted = pairName.replace('-', '')
+      pairNameFormatted = pairNameFormatted.replace('BTC', 'XBT')
+      return `https://api.kraken.com/0/public/Ticker?pair=${pairNameFormatted}`
+    },
+    getExchangeUrl: function (pairName) {
+      return `https://www.kucoin.com/#/trade.pro/${pairName}`
+    },
+    withdrawal: {
+      BTC: 0.001,
+      BCH: 0.0005,
+      ETH: 0.01,
+      DASH: 0.002,
+      NEO: 0,
+      XLM: 0.00002,
       LTC: 0.001
     },
     active: true

@@ -1,12 +1,34 @@
 const pairs = [
   {
     name: 'XLM-BTC',
-    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+    exchanges: ['Bittrex', 'Binance', 'Poloniex', 'Kraken'],
     courses: [],
     percentLimit: 1.5,
     coins: 10000,
     transferFees: {
       XLM: 0.00001,
+      BTC: 0.001
+    }
+  },
+  {
+    name: 'BTC-USDT',
+    exchanges: ['Bittrex', 'Binance', 'Poloniex'],
+    courses: [],
+    percentLimit: 1.5,
+    coins: 0.5,
+    transferFees: {
+      USDT: 0.00001,
+      BTC: 0.001
+    }
+  },
+  {
+    name: 'SALT-BTC',
+    exchanges: ['Bittrex', 'Binance'],
+    courses: [],
+    percentLimit: 1.5,
+    coins: 0.5,
+    transferFees: {
+      SALT: 0.00001,
       BTC: 0.001
     }
   },
