@@ -40,7 +40,7 @@ const pairs = [
     coins: 10000,
     transferFees: {
       XLM: 0.00001,
-      ETH: 0.00099
+      ETH: 0.00011
     }
   },
   {
@@ -50,7 +50,7 @@ const pairs = [
     percentLimit: 2,
     coins: 10,
     transferFees: {
-      ETH: 0.00099,
+      ETH: 0.00011,
       BTC: 0.00026848
     }
   }
@@ -73,7 +73,7 @@ const pairs = [
   //   coins: 25,
   //   transferFees: {
   //     XRP: 0.15,
-  //     ETH: 0.00099
+  //     ETH: 0.00011
   //   }
   // },
   // {
@@ -106,7 +106,7 @@ const pairs = [
   //   coins: 160,
   //   transferFees: {
   //     ETC: 0.001,
-  //     ETH: 0.00099
+  //     ETH: 0.00011
   //   }
   // },
   // {
@@ -128,7 +128,7 @@ const pairs = [
   //   coins: 160,
   //   transferFees: {
   //     ADA: 0.001,
-  //     ETH: 0.00099
+  //     ETH: 0.00011
   //   }
   // },
   // {
@@ -150,7 +150,7 @@ const pairs = [
   //   coins: 25,
   //   transferFees: {
   //     NEO: 0.01,
-  //     ETH: 0.00099
+  //     ETH: 0.00011
   //   }
   // },
   // {
@@ -161,7 +161,7 @@ const pairs = [
   //   coins: 50,
   //   transferFees: {
   //     NEO: 0.01,
-  //     ETH: 0.00099
+  //     ETH: 0.00011
   //   }
   // }
 ]
