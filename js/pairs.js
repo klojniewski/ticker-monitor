@@ -120,17 +120,17 @@ const pairs = [
   //     BTC: 0.00099
   //   }
   // },
-  {
-    name: 'NEO-BTC',
-    exchanges: ['Bittrex', 'Binance', 'Kucoin'],
-    courses: [],
-    percentLimit: 3,
-    coins: 25,
-    transferFees: {
-      NEO: 0.01,
-      ETH: 0.00011
-    }
-  },
+  // {
+  //   name: 'EOS-BTC',
+  //   exchanges: ['okex', 'Binance'],
+  //   courses: [],
+  //   percentLimit: 3,
+  //   coins: 25,
+  //   transferFees: {
+  //     EOS: 0.01,
+  //     BTC: 0.00099
+  //   }
+  // },
   {
     name: 'NEO-ETH',
     exchanges: ['Bittrex', 'Binance', 'Kucoin'],

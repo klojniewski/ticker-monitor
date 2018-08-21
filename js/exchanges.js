@@ -88,7 +88,7 @@ const exchangeDrivers = [
     getTickerUrl: function (pairNameOrygial) {
       const pairArray = pairNameOrygial.split('-')
       const pairName = `${pairArray[1]}-${pairArray[0]}`
-      return `https://api.finvea.pl/ticker.php?market=bittrex&coin=${pairName}`
+      return `https://api.pagepro.co/ticker.php?market=bittrex&coin=${pairName}`
     },
     getExchangeUrl: function (pairName) {
       const pairArray = pairName.split('-')
@@ -125,7 +125,7 @@ const exchangeDrivers = [
     getTickerUrl: function (pairName) {
       const pairNameFormatted = pairName.replace('-', '')
 
-      return `https://api.finvea.pl/ticker.php?market=bitmarket&coin=${pairNameFormatted}`
+      return `https://api.pagepro.co/ticker.php?market=bitmarket&coin=${pairNameFormatted}`
     },
     getExchangeUrl: function (pairName) {
       const pairNameFormatted = pairName.replace('-', '')
@@ -153,7 +153,7 @@ const exchangeDrivers = [
     getTickerUrl: function (pairName) {
       const pairNameFormatted = pairName.replace('-', '')
 
-      return `https://api.finvea.pl/ticker.php?market=binance&coin=${pairNameFormatted}`
+      return `https://api.pagepro.co/ticker.php?market=binance&coin=${pairNameFormatted}`
     },
     getExchangeUrl: function (pairName) {
       const pairNameFormatted = pairName.replace('-', '_')
@@ -244,7 +244,36 @@ const exchangeDrivers = [
       }
     },
     getTickerUrl: function (pairName) {
-      return `https://api.finvea.pl/ticker.php?market=kucoin&coin=${pairName}`
+      return `https://api.pagepro.co/ticker.php?market=kucoin&coin=${pairName}`
+    },
+    getExchangeUrl: function (pairName) {
+      return `https://www.kucoin.com/#/trade.pro/${pairName}`
+    },
+    withdrawal: {
+      BTC: 0.0005,
+      BCH: 0.0005,
+      ETH: 0.01,
+      DASH: 0.002,
+      NEO: 0,
+      LTC: 0.001
+    },
+    active: true
+  },
+  {
+    id: 8,
+    name: 'Okex',
+    makerFee: 0.1 / 100,
+    takerFee: 0.1 / 100,
+    upfrontFee: false,
+    praseTicker: function (ticker, pair) {
+      console.log(ticker)
+      return {
+        ask: parseFloat(ticker.data.sell),
+        bid: parseFloat(ticker.data.buy)
+      }
+    },
+    getTickerUrl: function (pairName) {
+      return `https://www.okex.com/api/v1/ticker.do?symbol=eos_btc${pairName}`
     },
     getExchangeUrl: function (pairName) {
       return `https://www.kucoin.com/#/trade.pro/${pairName}`
